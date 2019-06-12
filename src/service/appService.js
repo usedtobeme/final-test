@@ -6,7 +6,7 @@ export function getAll(callback) {
   axios
     .get(url)
     .then(res => {
-      return(res);
+      callback(res);
     })
     .catch(e => {
       console.log(e);

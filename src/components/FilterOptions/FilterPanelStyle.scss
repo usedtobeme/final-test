@@ -1,0 +1,85 @@
+.section-filters {
+  height: 25vh;
+  background-color: rgb(0, 1, 52);
+  border-radius: 0 0 30% 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.whole-list {
+  color: white;
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  background-color: #121341;
+  height: 60px;
+  padding: 0;
+  align-items: center;
+}
+
+.list-item {
+  margin: 5px;
+  border: 1px solid rgba(255,255,255,.5);
+  border-radius: 25px;
+  width: 100px;
+  height: 25px;
+  &__button {
+    cursor: pointer;  
+    background: 0;
+    display: flex;
+    justify-content: space-evenly;
+    color: white;
+    border: 1px solid white;
+    font-weight: 100;
+    font-size: 11px;
+    width: 100%;
+    height: 100%;
+    outline:none;
+    border-radius: 25px;
+  }
+  &__button-deactivated{    
+    cursor: pointer;  
+    background: 0;
+    display: flex;
+    justify-content: space-evenly;
+    color: white;
+    border: 0;
+    font-weight: 100;
+    font-size: 11px;
+    width: 100%;
+    height: 100%;
+    outline:none;
+    border-radius: 25px;
+
+  }
+}
+
+.list-item:active{
+  border: 1px solid rgb(255,255,255);
+}
+.fas.fa-check {
+  color: green;
+}
+
+.far.fa-clock {
+  color: orange;
+}
+
+.fa.fa-times {
+  color: #990000;
+}
+
+.addDatebtn {
+  cursor: pointer;
+  align-self: center;
+  width: 50%;
+  border: 9px solid #121341;
+  color: white;
+  background-color: #5ace9f;
+  height: 58px;
+  border-radius: 25px;
+}
+.addDatebtn:hover {
+  background-image: linear-gradient(to bottom, #5ace9f, #5acea0);
+}
