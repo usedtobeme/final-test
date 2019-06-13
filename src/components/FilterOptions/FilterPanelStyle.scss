@@ -4,8 +4,7 @@
   border-radius: 0 0 30% 30%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-}
+  }
 
 .whole-list {
   color: white;
@@ -17,46 +16,38 @@
   padding: 0;
   align-items: center;
 }
+.button {
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
+  cursor: pointer;
+  background: 0;
+  display: flex;
+  justify-content: space-evenly;
+  color: white;
+  font-weight: 100;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+}
 
 .list-item {
   margin: 5px;
-  border: 1px solid rgba(255,255,255,.5);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 25px;
   width: 100px;
   height: 25px;
   &__button {
-    cursor: pointer;  
-    background: 0;
-    display: flex;
-    justify-content: space-evenly;
-    color: white;
     border: 1px solid white;
-    font-weight: 100;
-    font-size: 11px;
-    width: 100%;
-    height: 100%;
-    outline:none;
-    border-radius: 25px;
   }
-  &__button-deactivated{    
-    cursor: pointer;  
-    background: 0;
-    display: flex;
-    justify-content: space-evenly;
-    color: white;
+  &__button-deactivated {
     border: 0;
-    font-weight: 100;
-    font-size: 11px;
-    width: 100%;
-    height: 100%;
-    outline:none;
-    border-radius: 25px;
-
   }
 }
 
-.list-item:active{
-  border: 1px solid rgb(255,255,255);
+.list-item:hover,
+.list-item:active,
+.list-item:focus {
+  border: 1px solid rgb(255, 255, 255);
 }
 .fas.fa-check {
   color: green;
@@ -79,6 +70,7 @@
   background-color: #5ace9f;
   height: 58px;
   border-radius: 25px;
+  margin-top: 10px;
 }
 .addDatebtn:hover {
   background-image: linear-gradient(to bottom, #5ace9f, #5acea0);

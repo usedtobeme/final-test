@@ -3,7 +3,7 @@ import * as Service from "../../service/appService";
 import "./HeadBarStyle.scss";
 import avatar from '../../assets/Images/avatar.png'
 
-export default function HeadBar(props) {
+export default function HeadBar() {
   const [defaultUser, setDefaultUser] = useState();
 
   useEffect(() => {

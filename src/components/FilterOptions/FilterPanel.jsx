@@ -5,34 +5,20 @@ const state = {
   All: true,
   Confirmed: false,
   Pending: false,
-  Canceled: false
+  Cancelled: false
 };
 
 export default function FilteredPanel() {
   const [selected, setSelected] = useState(state);
 
-  useEffect(() => {}, [selected]);
-  const handleClick = e => {
-    const name = e.target.value;
+  useEffect(() => {
+    const numberOfSelectedItems = Object.entries(selected).filter(
+      e => e[0] !== "All" && e[1]
+    );
 
-    if (name === "All") setSelected(state);
-    else {
-      setSelected({ ...selected, [name]: !selected.name });
-      const numberOfSelectedItems = Object.entries(selected).filter(
-        e => e[0] !== "All" && e[1]
-      );
-      console.log(numberOfSelectedItems);
+    if (numberOfSelectedItems.length === 3) setSelected(state);
+  }, [selected]);
 
-      if (numberOfSelectedItems.length === 3) setSelected(state);
-      else {
-        setSelected({
-          ...selected,
-          All: false,
-          [name]: !selected[name]
-        });
-      }
-    }
-  };
   return (
     <section className="section-filters">
       <div className="combobox-container" name="select-filters">
@@ -42,13 +28,12 @@ export default function FilteredPanel() {
             <button
               className={
                 selected.All
-                  ? "list-item__button"
-                  : "list-item__button-deactivated"
+                  ? "button list-item__button"
+                  : "button list-item__button-deactivated"
               }
               value="All"
-              onClick={e => {
-                setSelected(state);
-              }}
+              onClick={() => setSelected(state)}
+              aria-label='show all dates'
             >
               All
             </button>
@@ -57,13 +42,19 @@ export default function FilteredPanel() {
             <button
               className={
                 selected.Confirmed
-                  ? "list-item__button"
-                  : "list-item__button-deactivated"
+                  ? "button list-item__button"
+                  : "button list-item__button-deactivated"
               }
               value="Confirmed"
-              onClick={() => {
-                setSelected({ ...selected, Confirmed: !selected.Confirmed });
-              }}
+              onClick={() =>
+                setSelected({
+                  ...selected,
+                  Confirmed: !selected.Confirmed,
+                  All: false
+                })
+              }
+              aria-label='filter confirmed dates'
+
             >
               Confirmed
               <i className="fas fa-check" />
@@ -73,13 +64,19 @@ export default function FilteredPanel() {
             <button
               className={
                 selected.Pending
-                  ? "list-item__button"
-                  : "list-item__button-deactivated"
+                  ? "button list-item__button"
+                  : "button list-item__button-deactivated"
               }
               value="Pending"
-              onClick={e => {
-                setSelected(e.target.value);
-              }}
+              onClick={() =>
+                setSelected({
+                  ...selected,
+                  Pending: !selected.Pending,
+                  All: false
+                })
+              }
+              aria-label='filter pending dates'
+
             >
               Pending
               <i className="far fa-clock" />
@@ -88,16 +85,22 @@ export default function FilteredPanel() {
           <li className="list-item">
             <button
               className={
-                selected.Canceled
-                  ? "list-item__button"
-                  : "list-item__button-deactivated"
+                selected.Cancelled
+                  ? "button list-item__button"
+                  : "button list-item__button-deactivated"
               }
-              value="Canceled"
-              onClick={e => {
-                setSelected(e.target.value);
-              }}
+              value="Cancelled"
+              onClick={() =>
+                setSelected({
+                  ...selected,
+                  Cancelled: !selected.Cancelled,
+                  All: false
+                })
+              }
+              aria-label='filter canceled dates'
+
             >
-              Canceled
+              Cancelled
               <i className="fa fa-times" />
             </button>
           </li>

@@ -23,20 +23,20 @@
     margin-left: 2%;
     align-self: center;
     font-size: 21px;
+    letter-spacing: 1px;
   }
 }
 .avatar-name {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   height: 100%;
-}
-.avatar-name {
+  width: 25%;
   h3 {
     align-self: center;
     text-align: center;
     color: white;
-    font-weight: 100;
+    font-weight: 400;
     font-size: 14px;
-    width: 50%;
+    width: 30%;
   }
 }
