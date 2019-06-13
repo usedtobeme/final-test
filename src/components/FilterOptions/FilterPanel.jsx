@@ -108,7 +108,7 @@ export default function FilteredPanel() {
       </div>
       <button className="addDatebtn">
         <i className="fas fa-coffee" />
-        Add Klastch
+        Add Klatsch
       </button>
     </section>
   );

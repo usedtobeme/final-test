@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import * as Service from "../../service/appService";
 import "./HeadBarStyle.scss";
-import avatar from '../../assets/Images/avatar.png'
+import avatar from "../../assets/Images/avatar.png";
 
 export default function HeadBar() {
   const [defaultUser, setDefaultUser] = useState();
+  const [done, setDone] = useState(false);
 
   useEffect(() => {
     Service.getId(1, e => {
       setDefaultUser(e.data);
+      setDone(true);
     });
   }, []);
 
@@ -21,12 +23,10 @@ export default function HeadBar() {
       <header className="header">
         <h1>My Klatschboard</h1>
         <div className="avatar-name">
-          <img
-            src={avatar}
-            alt="profile avatar icon"
-            className="avatar"
-          />
-          <h3>{`${mainUser().first_name} ${mainUser().last_name}`}</h3>
+          <img src={avatar} alt="profile avatar icon" className="avatar" />
+          <h3>
+            {done ? `${mainUser().first_name} ${mainUser().last_name}` : ""}
+          </h3>
         </div>
       </header>
     </section>

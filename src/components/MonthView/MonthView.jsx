@@ -29,12 +29,12 @@ export default function MonthView() {
 
   function setMonthView(e) {
     if (e === -1) {
-      if (currDate.Month === 0) {
+      if (currDate.Month === 0 && currDate.Year > 2019) {
         setCurrDate({
           Month: 11,
           Year: currDate.Year - 1
         });
-      } else
+      } else if (currDate.Month > new Date().getMonth())
         setCurrDate({
           ...currDate,
           Month: currDate.Month - 1
@@ -68,7 +68,6 @@ export default function MonthView() {
           onKeyDown={e => keyDown(-1, e)}
           tabIndex={1}
           aria-label="previous month view"
-
         />
         <div className="section-date__container">
           <span className="section-date__month">{Months[currDate.Month]}</span>
