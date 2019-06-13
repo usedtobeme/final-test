@@ -1,5 +1,7 @@
 import React from 'react';
 import './Appointments.scss'
+import avatar from "../../assets/Images/avatar.png";
+
 
 export default function Appointments(){
 
@@ -15,6 +17,13 @@ export default function Appointments(){
 
     </section>
     <section className="section-appointments__info">
+    <div className="personal-info">
+        <img src={avatar} className='avatar' alt="avatar"/>
+        <span>Maartha puta</span>
+    </div>
+    <div className="date-status">
+
+    </div>
 
     </section>
     <section className="section-appointments__actions"></section>

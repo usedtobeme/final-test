@@ -9,8 +9,21 @@
     position: relative;
     display: flex;
     align-items: center;
+    .time {
+      display: flex;
+      flex-direction: column;
+      &__hour {
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+      }
+      &__duration {
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 12px;
+      }
+    }
   }
-  &__time:after {
+  &__time::after {
     content: "";
     height: 80%;
     width: 1px;
@@ -19,18 +32,12 @@
     top: 25px;
     background-color: rgba(0, 0, 0, 0.2);
   }
-
-  .time {
-    display: flex;
-    flex-direction: column;
-    &__hour{
-        font-weight: bold;
-        display: flex;
-        justify-content: space-between;
-    }
-    &__duration{
-        color:rgba(0,0,0,0.5);
-        font-size: 12px;
+  &__info {
+      position: absolute;
+      left:10%; 
+    .personal-info {
+      display: flex;
+      flex-direction: column;
     }
   }
 }
