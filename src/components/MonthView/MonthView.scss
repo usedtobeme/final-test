@@ -19,7 +19,7 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 
   &__month {
-    font-weight: 900;
+    font-weight: 700;
   }
   &__year {
     margin-left: 5px;
@@ -37,7 +37,6 @@
   height: 60%;
   width: 85%;
   background-color: white;
-  display: flex;
   color: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: space-evenly;
@@ -51,7 +50,7 @@
 
   span:first-child {
     color: black;
-    font-weight: 600;
+    font-weight: 500;
     margin-right: 5px;
   }
   span:last-child {

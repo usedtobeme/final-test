@@ -1,17 +1,15 @@
 .section-appointments {
-  height: 100vh-75vh;
+  height: 25vh;
   margin: 0 10%;
   display: flex;
-  -moz-box-shadow: 0 8px 6px -6px black;
   box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.5);
   border-radius: 25px;
+  border-top: 7px solid #4990e2;
   &__time {
     position: relative;
     display: flex;
     align-items: center;
     .time {
-      display: flex;
-      flex-direction: column;
       &__hour {
         font-weight: bold;
         display: flex;
@@ -21,23 +19,56 @@
         color: rgba(0, 0, 0, 0.5);
         font-size: 12px;
       }
+      &__separator{
+        height: 75%;
+        width: 3px;
+        color:red
+      }
     }
   }
-  &__time::after {
-    content: "";
-    height: 80%;
-    width: 1px;
-    position: absolute;
-    left: 20vw;
-    top: 25px;
-    background-color: rgba(0, 0, 0, 0.2);
-  }
+
   &__info {
-      position: absolute;
-      left:10%; 
+    display: flex;
+    width: 70%;
+    flex-direction: column;
+    justify-content: space-evenly;
     .personal-info {
       display: flex;
       flex-direction: column;
+      align-items: center;
+    }
+    .date-status {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      &__date {
+        font-weight: 600;
+      }
+      &__status {
+        display: list-item;
+        color: #4990e2;
+        font-size: 12px;
+        font-weight: 700;
+      }
+    }
+    .fas.fa-map-marker-alt {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      .location {
+        color: rgba(0, 0, 0, 0.5);
+      }
+    }
+  }
+  &__actions {
+    display: flex;
+    align-items: center;
+    .actions-icons {
+      display: flex;
+      flex-direction: column;
+      height: 30%;
+      justify-content: space-between;
+      color: rgba(0, 0, 0, 0.5);
     }
   }
 }

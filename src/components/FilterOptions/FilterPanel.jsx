@@ -22,8 +22,8 @@ export default function FilteredPanel() {
   return (
     <section className="section-filters">
       <div className="combobox-container" name="select-filters">
-        <span>Show only:</span>
-        <ul aria-label="filter-options" className="whole-list">
+        <span className="show-only">Show only:</span>
+        <ul aria-label="filter-options" className="filter-options">
           <li className="list-item">
             <button
               className={

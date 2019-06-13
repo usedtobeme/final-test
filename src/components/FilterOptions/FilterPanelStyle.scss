@@ -4,17 +4,34 @@
   border-radius: 0 0 30% 30%;
   display: flex;
   flex-direction: column;
-  }
+  justify-content: center;
+}
+.combobox-container {
+  height: 10vh;
+  width: 100%;
+  background-color: #121341;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
 
-.whole-list {
+.show-only {
+  color: white;
+  font-size: 11px;
+  height: 3vh;
+  padding: 5px 0 0 10px;
+  font-weight: 200;
+}
+
+.filter-options {
   color: white;
   list-style-type: none;
   display: flex;
   flex-direction: row;
   background-color: #121341;
-  height: 60px;
+  height: 50px;
   padding: 0;
-  align-items: center;
+  align-items: flex-start;
 }
 .button {
   width: 100%;
@@ -25,7 +42,7 @@
   display: flex;
   justify-content: space-evenly;
   color: white;
-  font-weight: 100;
+  font-weight: 300;
   font-size: 11px;
   letter-spacing: 0.05em;
 }
@@ -48,6 +65,8 @@
 .list-item:active,
 .list-item:focus {
   border: 1px solid rgb(255, 255, 255);
+  font-weight: 400;
+  color: rebeccapurple
 }
 .fas.fa-check {
   color: green;

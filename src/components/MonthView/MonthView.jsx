@@ -12,10 +12,10 @@ export default function MonthView() {
   const [users, setUsers] = useState();
   useEffect(() => {
     Service.getAll(e => {
-      e.data.shift();
       setUsers(e.data);
     });
   }, []);
+
 
   const getConfirmed = () => {
     if (users) return users.filter(e => e.status === "confirmed").length;
@@ -34,7 +34,7 @@ export default function MonthView() {
           Month: 11,
           Year: currDate.Year - 1
         });
-      } else if (currDate.Month > new Date().getMonth())
+      } else if (currDate.Month > new Date().getMonth() || currDate.Year> new Date().getFullYear())
         setCurrDate({
           ...currDate,
           Month: currDate.Month - 1
