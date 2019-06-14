@@ -18,8 +18,8 @@ export default function MonthView() {
 
   const checkDateRange = e => {
     return (
-      currDate.Month === new Date(e.appointment[0].start).getMonth() &&
-      currDate.Year === new Date(e.appointment[0].start).getFullYear()
+      currDate.Month === new Date(e.appointment.start).getMonth() &&
+      currDate.Year === new Date(e.appointment.start).getFullYear()
     );
   };
   const getConfirmed = () => {
@@ -74,51 +74,51 @@ export default function MonthView() {
   };
 
   return (
-    <section className="section-sidebar">
-      <section className="section-date">
+    <section className='section-sidebar'>
+      <section className='section-date'>
         <i
-          className="fas fa-chevron-left"
+          className='fas fa-chevron-left'
           onClick={() => setMonthView(-1)}
           onKeyDown={e => keyDown(-1, e)}
           tabIndex={1}
-          aria-label="previous month view"
+          aria-label='previous month view'
         />
-        <div className="section-date__container">
-          <span className="section-date__month">{Months[currDate.Month]}</span>
-          <span className="section-date__year">{currDate.Year}</span>
+        <div className='section-date__container'>
+          <span className='section-date__month'>{Months[currDate.Month]}</span>
+          <span className='section-date__year'>{currDate.Year}</span>
         </div>
         <i
-          className="fas fa-chevron-right"
+          className='fas fa-chevron-right'
           onClick={() => setMonthView(1)}
           tabIndex={2}
           onKeyDown={e => keyDown(1, e)}
-          aria-label="next month view"
+          aria-label='next month view'
         />
       </section>
-      <section className="section-summary">
-        <div className="section-summary__container">
-          <div className="section-summary__icon section-summary__icon__confirmed">
-            <i className="icon fas fa-check" />
+      <section className='section-summary'>
+        <div className='section-summary__container'>
+          <div className='section-summary__icon section-summary__icon__confirmed'>
+            <i className='icon fas fa-check' />
           </div>
-          <div className="section-summary__text">
+          <div className='section-summary__text'>
             <span>{getConfirmed()}</span>
             <span>Confirmed</span>
           </div>
         </div>
-        <div className="section-summary__container">
-          <div className="section-summary__icon section-summary__icon__pending">
-            <i className="icon far fa-clock" />
+        <div className='section-summary__container'>
+          <div className='section-summary__icon section-summary__icon__pending'>
+            <i className='icon far fa-clock' />
           </div>
-          <div className="section-summary__text">
+          <div className='section-summary__text'>
             <span>{getPending()}</span>
             <span>Pending</span>
           </div>
         </div>
-        <div className="section-summary__container">
-          <div className="section-summary__icon section-summary__icon__canceled">
-            <i className="icon fas fa-times" />
+        <div className='section-summary__container'>
+          <div className='section-summary__icon section-summary__icon__canceled'>
+            <i className='icon fas fa-times' />
           </div>
-          <div className="section-summary__text">
+          <div className='section-summary__text'>
             <span>{getCancelled()}</span>
             <span>Cancelled</span>
           </div>

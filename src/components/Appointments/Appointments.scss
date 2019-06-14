@@ -1,10 +1,18 @@
+.main-container {
+  position: absolute;
+  width: 100%;
+  top: 80%;
+}
 .section-appointments {
   height: 25vh;
   margin: 5% 10%;
+  width: 80%;
   display: flex;
   box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
- border-top: 7px solid #4990e2;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 7px solid #4990e2;
+  background-color: white;
   &__time {
     position: relative;
     display: flex;
@@ -89,8 +97,89 @@
 }
 
 .section-appointments.cancelled {
- border-top: 7px solid #f66972;;
+  border-top: 7px solid #f66972;
 }
 .section-appointments.pending {
- border-top: 7px solid #fca023;
+  border-top: 7px solid #fca023;
 }
+
+$spinner-size: 2rem;
+$animation-speed: 1.2s;
+
+.load-container {
+  position: absolute;
+  left: 50%;
+  margin-top: 42%;
+  transform: translate(-50%, -50%);
+}
+
+.load {
+  span {
+    display: inline-block;
+    width: $spinner-size;
+    height: $spinner-size;
+    background-color: #000000;
+    border-radius: 50%;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    -webkit-animation: $animation-speed infinite bubble ease-in-out;
+    animation: $animation-speed infinite bubble ease-in-out;
+  }
+  span:nth-child(1) {
+    background-color: #900c3e;
+    -webkit-animation-delay: 0s;
+    animation-delay: 0s;
+  }
+  span:nth-child(2) {
+    background-color: #c70039;
+    -webkit-animation-delay: 0.2s;
+    animation-delay: 0.2s;
+  }
+  span:nth-child(3) {
+    background-color: #ff5733;
+    -webkit-animation-delay: 0.4s;
+    animation-delay: 0.4s;
+  }
+  span:nth-child(4) {
+    background-color: #ff9800;
+    -webkit-animation-delay: 0.6s;
+    animation-delay: 0.6s;
+  }
+}
+
+@keyframes bubble {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  50% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+}
+
+.today-appointments {
+  width: 100%;
+  display: flex;
+  direction: column;
+  justify-content: unsafe;
+  flex-direction: column;
+  align-items: center;
+  .today-label {
+    color: white;
+    font-weight: 900;
+    font-size: 30px;
+  }
+}
+
+.today-separator {
+  width: 85%;
+  height: 1px;
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+

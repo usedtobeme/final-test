@@ -44,25 +44,12 @@
 .navigation {
   position: absolute;
   width: 0px;
-  height: 0vh;
-  margin: 0;
-  background-color: white;
-  display: flex;
-  justify-content: center;
-  transition: 0.3s all ease-in-out;
-
+  height: 0%;
+  transition: all 0.3s;
+  z-index: -1;
   &__list {
-    list-style: none;
-    position: absolute;
-    padding: 0;
-    right: 10px;
-    height: 50vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    transition: 0.3s all ease-in-out;
-
-
+    position: relative;
+    display: none;
     &__item {
       font-size: 30px;
       color: black;
@@ -76,23 +63,21 @@
   z-index: 3;
   width: 60px;
   height: 100%;
-  margin: 0;
   background-color: white;
   display: flex;
   justify-content: center;
-  transition: 0.3s all ease-in-out;
   border-radius: 0 25px 25px 0;
+  transition: width 0.3s;
 
   &__list-show {
+    position: relative;
     list-style: none;
-    position: absolute;
     padding: 0;
     height: 50vh;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    transition: 0.3s all ease-in-out;
-
+    
   }
 }
 

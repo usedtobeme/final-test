@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./FilterPanelStyle.scss";
+import Appointments from "../Appointments/Appointments";
 
 const state = {
   All: true,
-  Confirmed: false,
-  Pending: false,
-  Cancelled: false
+  confirmed: false,
+  pending: false,
+  cancelled: false
 };
 
 export default function FilteredPanel() {
@@ -16,100 +17,94 @@ export default function FilteredPanel() {
       e => e[0] !== "All" && e[1]
     );
 
-    if (numberOfSelectedItems.length === 3) setSelected(state);
+    if (numberOfSelectedItems.length === 3||numberOfSelectedItems.length === 0) setSelected(state);
   }, [selected]);
 
   return (
-    <section className="section-filters">
-      <div className="combobox-container" name="select-filters">
-        <span className="show-only">Show only:</span>
-        <ul aria-label="filter-options" className="filter-options">
-          <li className="list-item">
+    <section className='section-filters'>
+      <div className='combobox-container' name='select-filters'>
+        <span className='show-only'>Show only:</span>
+        <ul aria-label='filter-options' className='filter-options'>
+          <li className='list-item'>
             <button
               className={
                 selected.All
                   ? "button list-item__button"
                   : "button list-item__button-deactivated"
               }
-              value="All"
+              value='All'
               onClick={() => setSelected(state)}
-              aria-label='show all dates'
-            >
+              aria-label='show all dates'>
               All
             </button>
           </li>
-          <li className="list-item" value="confirmed">
+          <li className='list-item' value='confirmed'>
             <button
               className={
-                selected.Confirmed
+                selected.confirmed
                   ? "button list-item__button"
                   : "button list-item__button-deactivated"
               }
-              value="Confirmed"
+              value='Confirmed'
               onClick={() =>
                 setSelected({
                   ...selected,
-                  Confirmed: !selected.Confirmed,
+                  confirmed: !selected.confirmed,
                   All: false
                 })
               }
-              aria-label='filter confirmed dates'
-
-            >
+              aria-label='filter confirmed dates'>
               Confirmed
-              <i className="fas fa-check" />
+              <i className='fas fa-check' />
             </button>
           </li>
-          <li className="list-item">
+          <li className='list-item'>
             <button
               className={
-                selected.Pending
+                selected.pending
                   ? "button list-item__button"
                   : "button list-item__button-deactivated"
               }
-              value="Pending"
+              value='p'
               onClick={() =>
                 setSelected({
                   ...selected,
-                  Pending: !selected.Pending,
+                  pending: !selected.pending,
                   All: false
                 })
               }
-              aria-label='filter pending dates'
-
-            >
+              aria-label='filter pending dates'>
               Pending
-              <i className="far fa-clock" />
+              <i className='far fa-clock' />
             </button>
           </li>
-          <li className="list-item">
+          <li className='list-item'>
             <button
               className={
-                selected.Cancelled
+                selected.cancelled
                   ? "button list-item__button"
                   : "button list-item__button-deactivated"
               }
-              value="Cancelled"
+              value='Cancelled'
               onClick={() =>
                 setSelected({
                   ...selected,
-                  Cancelled: !selected.Cancelled,
+                  cancelled: !selected.cancelled,
                   All: false
                 })
               }
-              aria-label='filter canceled dates'
-
-            >
+              aria-label='filter canceled dates'>
               Cancelled
-              <i className="fa fa-times" />
+              <i className='fa fa-times' />
             </button>
           </li>
         </ul>
       </div>
-      <button className="addDatebtn">
-        <i className="fas fa-coffee" />
+      <button className='addDatebtn'>
+        <i className='fas fa-coffee' />
         Add Klatsch
       </button>
+      <Appointments filter={selected}/>
     </section>
   );
 }

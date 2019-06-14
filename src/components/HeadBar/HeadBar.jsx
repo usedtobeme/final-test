@@ -26,7 +26,7 @@ export default function HeadBar() {
         className={show ? "shadow-show" : "shadow-hide"}
         onClick={() => setShow(!show)}
       />
-      <nav className={show ? classes.navigation : classes.navigation2}>
+      <nav className={show ? classes.navigation : classes.navigation2} role='navigation'>
         <ul className={show ? classes.list : classes.list2}>
           <li className="navigation__list__item">
             <i className="fab fa-kickstarter-k" />

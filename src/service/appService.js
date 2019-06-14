@@ -1,13 +1,35 @@
 import axios from "axios";
 
-const url = "https://5cfe634cca949b00148d40ab.mockapi.io/data";
-const urlUser="https://5cfe634cca949b00148d40ab.mockapi.io/user"
+const url = "https://klatsch.herokuapp.com/users";
+const urlUser = "https://5cfe634cca949b00148d40ab.mockapi.io/user";
+console.log( `${url}?_sort=appointment.start&_order=asc&_page=1&_limit=${3}${true}&appointment.start_gte=${new Date().getTime()}}`)
 
 export function getAll(callback) {
   axios
     .get(url)
     .then(res => {
       callback(res);
+    })
+    .catch(e => {
+      console.log(e);
+      callback(e);
+    });
+}
+
+export function getFiltered(criteria, i, callback) {
+  let params = "";
+  if (!criteria[0]) {
+    params = `&status=${criteria[1]}&status=${criteria[2]}&status=${
+      criteria[3]
+    }`;
+  }
+
+  axios
+    .get(
+      `${url}?_sort=appointment.start&_order=asc&_page=1&_limit=${i}${params}&appointment.start_gte=${new Date().getTime()}`
+    )
+    .then(res => {
+      callback(res.data);
     })
     .catch(e => {
       console.log(e);
