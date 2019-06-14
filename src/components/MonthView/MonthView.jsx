@@ -16,15 +16,26 @@ export default function MonthView() {
     });
   }, []);
 
-
+  const checkDateRange = e => {
+    return (
+      currDate.Month === new Date(e.appointment[0].start).getMonth() &&
+      currDate.Year === new Date(e.appointment[0].start).getFullYear()
+    );
+  };
   const getConfirmed = () => {
-    if (users) return users.filter(e => e.status === "confirmed").length;
+    if (users)
+      return users.filter(e => e.status === "confirmed" && checkDateRange(e))
+        .length;
   };
   const getPending = () => {
-    if (users) return users.filter(e => e.status === "pending").length;
+    if (users)
+      return users.filter(e => e.status === "pending" && checkDateRange(e))
+        .length;
   };
   const getCancelled = () => {
-    if (users) return users.filter(e => e.status === "cancelled").length;
+    if (users)
+      return users.filter(e => e.status === "cancelled" && checkDateRange(e))
+        .length;
   };
 
   function setMonthView(e) {
@@ -34,7 +45,10 @@ export default function MonthView() {
           Month: 11,
           Year: currDate.Year - 1
         });
-      } else if (currDate.Month > new Date().getMonth() || currDate.Year> new Date().getFullYear())
+      } else if (
+        currDate.Month > new Date().getMonth() ||
+        currDate.Year > new Date().getFullYear()
+      )
         setCurrDate({
           ...currDate,
           Month: currDate.Month - 1

@@ -7,7 +7,7 @@
   justify-content: center;
 }
 .combobox-container {
-  height: 10vh;
+  height: 8vh;
   width: 100%;
   background-color: #121341;
   display: flex;
@@ -20,7 +20,7 @@
   font-size: 11px;
   height: 3vh;
   padding: 5px 0 0 10px;
-  font-weight: 200;
+  font-weight: 300;
 }
 
 .filter-options {
@@ -38,6 +38,7 @@
   height: 100%;
   border-radius: 25px;
   cursor: pointer;
+  outline: none;
   background: 0;
   display: flex;
   justify-content: space-evenly;
@@ -61,13 +62,6 @@
   }
 }
 
-.list-item:hover,
-.list-item:active,
-.list-item:focus {
-  border: 1px solid rgb(255, 255, 255);
-  font-weight: 400;
-  color: rebeccapurple
-}
 .fas.fa-check {
   color: green;
 }

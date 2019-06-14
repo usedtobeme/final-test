@@ -1,14 +1,16 @@
 .section-appointments {
   height: 25vh;
-  margin: 0 10%;
+  margin: 5% 10%;
   display: flex;
   box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.5);
-  border-radius: 25px;
-  border-top: 7px solid #4990e2;
+  border-radius: 10px;
+ border-top: 7px solid #4990e2;
   &__time {
     position: relative;
     display: flex;
     align-items: center;
+    width: 22%;
+    justify-content: flex-end;
     .time {
       &__hour {
         font-weight: bold;
@@ -19,19 +21,20 @@
         color: rgba(0, 0, 0, 0.5);
         font-size: 12px;
       }
-      &__separator{
+      &__separator {
         height: 75%;
         width: 3px;
-        color:red
+        color: red;
       }
     }
   }
 
   &__info {
     display: flex;
-    width: 70%;
+    width: 56%;
     flex-direction: column;
     justify-content: space-evenly;
+    align-items: center;
     .personal-info {
       display: flex;
       flex-direction: column;
@@ -50,19 +53,31 @@
         font-size: 12px;
         font-weight: 700;
       }
+
+      &__status.pending {
+        color: #fca023;
+      }
+      &__status.cancelled {
+        color: #f66972;
+      }
     }
     .fas.fa-map-marker-alt {
       display: flex;
       justify-content: space-between;
       font-size: 12px;
+      margin: 3px 0 0 3px;
+
       .location {
         color: rgba(0, 0, 0, 0.5);
+        margin-left: 5px;
       }
     }
   }
   &__actions {
     display: flex;
     align-items: center;
+    width: 22%;
+    justify-content: center;
     .actions-icons {
       display: flex;
       flex-direction: column;
@@ -71,4 +86,11 @@
       color: rgba(0, 0, 0, 0.5);
     }
   }
+}
+
+.section-appointments.cancelled {
+ border-top: 7px solid #f66972;;
+}
+.section-appointments.pending {
+ border-top: 7px solid #fca023;
 }
