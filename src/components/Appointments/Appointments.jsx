@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./Appointments.scss";
-import avatar from "../../assets/Images/avatar.png";
 import * as Service from "../../service/appService";
 import { Months } from "../../constants";
 
 export default function Appointments(props) {
   const { filter } = props;
   const [dates, setDates] = useState();
-  const [pages, setPages] = useState(1);
+  const [pages, setPages] = useState(3);
+  const [force, setforce] = useState(false);
 
   useEffect(() => {
     const params = Object.entries(filter).reduce((acc, curr, index) => {
@@ -18,7 +18,7 @@ export default function Appointments(props) {
     Service.getFiltered(params, pages, e => {
       setDates(e);
     });
-  }, [pages, filter]);
+  }, [pages, filter, force]);
 
   const formatDate = e => {
     const start = new Date(e.appointment.start);
@@ -34,14 +34,21 @@ export default function Appointments(props) {
   };
 
   const getDuration = e => {
-    console.log(e);
-    const start = new Date(e.appointment.start);
-    const end = new Date(e.appointment.end);
-    console.log(end)
+    let end;
+    let start;
+    console.log(filter);
+    if (dates && dates.length > 0) {
+      if (e === "duration") {
+        start = new Date(dates[0].appointment.start);
+        end = new Date();
+      } else {
+        start = new Date(e.appointment.start);
+        end = new Date(e.appointment.end);
+      }
+    }
 
     var diff = (end - start) / 1000;
     diff /= 60;
-    console.log(`${Math.abs(Math.round(diff))} minutes`)
     return `${Math.abs(Math.round(diff))} minutes`;
   };
 
@@ -77,82 +84,75 @@ export default function Appointments(props) {
     );
   };
 
+  const cancelDate = e => {
+    e.status = "cancelled";
+    Service.changeStatus(e, () => {
+      setforce(!force);
+    });
+  };
+
+  const confirmDate = e => {
+    e.status = "confirmed ";
+    Service.changeStatus(e, () => {
+      setforce(!force);
+    });
+  };
+
+  const markup = (e, index) => (
+    <section className={`section-appointments ${e.status}`} key={index}>
+      <section className={`section-appointments__time ${e.status}`}>
+        <div className="time">
+          <span className="time__hour">
+            <span>{formatDate(e)}</span>
+          </span>
+          <span className="time__duration">{getDuration(e)}</span>
+          <div className="time__separator" />
+        </div>
+      </section>
+      <section className="section-appointments__info">
+        <div className={`personal-info ${e.status}`}>
+          <img src={e.avatar} className="avatar" alt="avatar" />
+          <span>{`${e.first_name} ${e.last_name}`}</span>
+          <i className="fas fa-map-marker-alt">
+            <span className="location">{e.location[0].place}</span>
+          </i>
+        </div>
+        <div className="date-status">
+          <span className={`date-status__date ${e.status}`}>{getMonth(e)}</span>
+          <span className={`date-status__status ${e.status}`}>{e.status}</span>
+        </div>
+      </section>
+
+      <section className="section-appointments__actions">
+        {e.status === "cancelled" ? null : (
+          <div className="actions-icons">
+            {e.status === "pending" ? (
+              <button className="hidden-button">
+                <i
+                  className="appointment fas fa-check"
+                  onClick={() => confirmDate(e)}
+                />
+              </button>
+            ) : (
+              <i className="fas fa-edit" />
+            )}
+            <i className="fas fa-times" onClick={() => cancelDate(e)} />
+          </div>
+        )}
+      </section>
+    </section>
+  );
+
   const renderToday = () => {
     if (dates)
-      dates.map((e, index) =>
-        isToday(new Date(e.appointment.start)) ? (
-          <section className={`section-appointments ${e.status}`} key={index}>
-            <section className='section-appointments__time'>
-              <div className='time'>
-                <span className='time__hour'>
-                  <span>{formatDate(e)}</span>
-                </span>
-                <span className='time__duration'>{getDuration(e)}</span>
-                <div className='time__separator' />
-              </div>
-            </section>
-            <section className='section-appointments__info'>
-              <div className='personal-info'>
-                <img src={avatar} className='avatar' alt='avatar' />
-                <span>{`${e.first_name} ${e.last_name}`}</span>
-                <i className='fas fa-map-marker-alt'>
-                  <span className='location'>{e.location.place}</span>
-                </i>
-              </div>
-              <div className='date-status'>
-                <span className='date-status__date'>{getMonth(e)}</span>
-                <span className={`date-status__status ${e.status}`}>
-                  {e.status}
-                </span>
-              </div>
-            </section>
-            <section className='section-appointments__actions'>
-              <div className='actions-icons'>
-                <i className='fas fa-edit' />
-                <i className='fas fa-times' />
-              </div>
-            </section>
-          </section>
-        ) : null
+      return dates.map((e, index) =>
+        isToday(new Date(e.appointment.start)) ? markup(e, index) : null
       );
   };
   const renderUpcoming = () => {
     if (dates)
       return dates.map((e, index) =>
-        !isToday(new Date(e.appointment.start)) ? (
-          <section className={`section-appointments ${e.status}`} key={index}>
-            <section className='section-appointments__time'>
-              <div className='time'>
-                <span className='time__hour'>
-                  <span>{formatDate(e)}</span>
-                </span>
-                <span className='time__duration'>{getDuration(e)}</span>
-                <div className='time__separator' />
-              </div>
-            </section>
-            <section className='section-appointments__info'>
-              <div className='personal-info'>
-                <img src={avatar} className='avatar' alt='avatar' />
-                <span>{`${e.first_name} ${e.last_name}`}</span>
-                <i className='fas fa-map-marker-alt'>
-                  <span className='location'>{e.location.place}</span>
-                </i>
-              </div>
-              <div className='date-status'>
-                <span className='date-status__date'>{getMonth(e)}</span>
-                <span className={`date-status__status ${e.status}`}>
-                  {e.status}
-                </span>
-              </div>
-            </section>
-            <section className='section-appointments__actions'>
-              <div className='actions-icons'>
-                <i className='fas fa-edit' />
-                <i className='fas fa-times' />
-              </div>
-            </section>
-          </section>
-        ) : null
+        !isToday(new Date(e.appointment.start)) ? markup(e, index) : null
       );
   };
 
@@ -161,15 +161,24 @@ export default function Appointments(props) {
       <button onClick={() => setPages(pages + 2)}>Load more</button>
     ) : null;
 
-  return (
-    <main className='main-container'>
-      <div className='today-appointments'>
-        <span className='today-label'>Today</span>
+  return dates ? (
+    <main className="main-container">
+      <div className="today-appointments">
+        <div className="today-info">
+          <span className="today-label">Today</span>
+          <span className="next-appointment">{`next meeting in ${getDuration(
+            "duration"
+          )}`}</span>
+        </div>
         {renderToday()}
-        <div className='today-separator' />
+        <div className="today-separator" />
       </div>
-      <div className='upcoming-appointments'>{renderUpcoming()}</div>
+      <div className="upcoming-appointments">
+        <span className="upcoming-label">Upcoming</span>
+        {renderUpcoming()}
+      </div>
+
       {renderButton()}
     </main>
-  );
+  ) : null;
 }

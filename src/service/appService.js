@@ -2,7 +2,6 @@ import axios from "axios";
 
 const url = "https://klatsch.herokuapp.com/users";
 const urlUser = "https://5cfe634cca949b00148d40ab.mockapi.io/user";
-console.log( `${url}?_sort=appointment.start&_order=asc&_page=1&_limit=${3}${true}&appointment.start_gte=${new Date().getTime()}}`)
 
 export function getAll(callback) {
   axios
@@ -51,6 +50,19 @@ export function getId(id, callback) {
 export function getUser(callback) {
   axios
     .get(urlUser)
+    .then(res => {
+      callback(res);
+    })
+    .catch(e => {
+      console.log(e);
+      callback(e);
+    });
+}
+export function changeStatus(e, callback) {
+  axios
+    .put(`${url}/${e.id}`, e, {
+      headers: { "Content-Type": "application/json" }
+    })
     .then(res => {
       callback(res);
     })

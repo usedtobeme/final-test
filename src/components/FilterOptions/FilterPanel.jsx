@@ -16,7 +16,7 @@ export default function FilteredPanel() {
     const numberOfSelectedItems = Object.entries(selected).filter(
       e => e[0] !== "All" && e[1]
     );
-
+      
     if (numberOfSelectedItems.length === 3||numberOfSelectedItems.length === 0) setSelected(state);
   }, [selected]);
 
@@ -55,7 +55,7 @@ export default function FilteredPanel() {
               }
               aria-label='filter confirmed dates'>
               Confirmed
-              <i className='fas fa-check' />
+              <i className='filter fas fa-check' />
             </button>
           </li>
           <li className='list-item'>

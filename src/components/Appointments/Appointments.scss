@@ -19,6 +19,7 @@
     align-items: center;
     width: 22%;
     justify-content: flex-end;
+
     .time {
       &__hour {
         font-weight: bold;
@@ -36,6 +37,10 @@
       }
     }
   }
+  &__time.cancelled {
+    opacity: 0.5;
+    filter: grayscale(100%);
+  }
 
   &__info {
     display: flex;
@@ -48,12 +53,20 @@
       flex-direction: column;
       align-items: center;
     }
+    .personal-info.cancelled {
+      opacity: 0.5;
+      filter: grayscale(100%);
+    }
     .date-status {
       display: flex;
       flex-direction: column;
       align-items: center;
       &__date {
         font-weight: 600;
+      }
+      &__date.cancelled {
+        opacity: 0.5;
+        filter: grayscale(100%);
       }
       &__status {
         display: list-item;
@@ -92,6 +105,7 @@
       height: 30%;
       justify-content: space-between;
       color: rgba(0, 0, 0, 0.5);
+      align-items: center;
     }
   }
 }
@@ -165,14 +179,26 @@ $animation-speed: 1.2s;
 .today-appointments {
   width: 100%;
   display: flex;
-  direction: column;
-  justify-content: unsafe;
   flex-direction: column;
   align-items: center;
-  .today-label {
-    color: white;
-    font-weight: 900;
-    font-size: 30px;
+  .today-info {
+    width: 70%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    .today-label {
+      color: white;
+      font-weight: 900;
+      font-size: 30px;
+    }
+    .next-appointment {
+      color: white;
+      font-size: 12px;
+      font-weight: 300;
+      font-style: italic;
+      word-break:  break-word;
+      width: 35%;
+    }
   }
 }
 
@@ -180,6 +206,21 @@ $animation-speed: 1.2s;
   width: 85%;
   height: 1px;
   margin: auto;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
 }
 
+.appointment.fas.fa-check {
+  color: grey;
+}
+
+.upcoming-appointments {
+  display: flex;
+  flex-direction: column;
+
+  .upcoming-label {
+    font-weight: 900;
+    font-size: 30px;
+    align-self: center;
+  }
+}

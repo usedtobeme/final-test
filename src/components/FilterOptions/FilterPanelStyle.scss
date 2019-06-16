@@ -1,5 +1,5 @@
 .section-filters {
-  height: 25vh;
+  height: 30vh;
   background-color: rgb(0, 1, 52);
   border-radius: 0 0 30% 30%;
   display: flex;
@@ -47,6 +47,7 @@
   font-weight: 300;
   font-size: 11px;
   letter-spacing: 0.05em;
+  align-items: center;
 }
 
 .list-item {
@@ -63,7 +64,7 @@
   }
 }
 
-.fas.fa-check {
+.filter.fas.fa-check {
   color: green;
 }
 
@@ -88,4 +89,10 @@
 }
 .addDatebtn:hover {
   background-image: linear-gradient(to bottom, #5ace9f, #5acea0);
+}
+
+@media (min-width: 380px) {
+  .section-filters {
+    height: 25vh;
+  }
 }
