@@ -1,18 +1,19 @@
-import React, { Fragment } from "react";
+import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import ReactDOM from "react-dom";
 import HeadBar from "./components/HeadBar/HeadBar";
 import FilterPanel from "./components/FilterOptions/FilterPanel";
 import MonthView from "./components/MonthView/MonthView";
+import SideBar from "./components/SideBar/SideBar";
 
 ReactDOM.render(
-  <Fragment>
-    <HeadBar />
-    <MonthView />
-    <FilterPanel />
-  </Fragment>,
+  <Router>
+    <Route exact path="/" component={HeadBar} />
+    <Route exact path="/" component={MonthView} />
+    <Route exact path="/" component={FilterPanel} />
+    <Route exact path="/modal" component={SideBar} />
+  </Router>,
   document.getElementById("root")
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+

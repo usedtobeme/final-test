@@ -32,11 +32,9 @@ export default function Appointments(props) {
 
     return `${hour}:${minutes} AM`;
   };
-
   const getDuration = e => {
     let end;
     let start;
-    console.log(filter);
     if (dates && dates.length > 0) {
       if (e === "duration") {
         start = new Date(dates[0].appointment.start);
@@ -156,10 +154,11 @@ export default function Appointments(props) {
       );
   };
 
-  const renderButton = () =>
-    dates ? (
+  const renderButton = () => {
+    return dates ? (
       <button onClick={() => setPages(pages + 2)}>Load more</button>
     ) : null;
+  };
 
   return dates ? (
     <main className="main-container">

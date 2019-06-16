@@ -1,0 +1,76 @@
+.backdropStyle {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 50px;
+}
+
+.modalStyle {
+  background-color: #fff;
+  border-radius: 5px;
+  max-width: 500px;
+  min-height: 70vh;
+  margin: 0 auto;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.modal-details {
+  height: 25vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.modal-label {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.form {
+  height: 30%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.date-status {
+  &__status.pending {
+    color: #fca023;
+    display: list-item;
+    font-size: 12px;
+    font-weight: 700;
+  }
+}
+
+.user-avatar {
+  border-radius: 50%;
+  background-color: rgba(256, 256, 256, 0.2);
+  display: flex;
+  align-self: center;
+      margin-right: 1%;
+  height: 40px;
+}
+
+.users-info{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+}
+.fa-mug-hot{
+    margin:0 15px;
+}
+.fa-question{
+    font-size: 28px;
+}
+
+

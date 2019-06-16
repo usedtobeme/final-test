@@ -71,3 +71,28 @@ export function changeStatus(e, callback) {
       callback(e);
     });
 }
+
+export function addNewDate(e, callback) {
+  axios
+    .post(url, e, {
+      headers: { "Content-Type": "application/json" }
+    })
+    .then(res => {
+      callback(res);
+    })
+    .catch(e => {
+      console.log(e);
+      callback(e);
+    });
+}
+export function deleteUser(id, callback) {
+  axios
+    .delete(`${url}/${id}`)
+    .then(res => {
+      callback(res);
+    })
+    .catch(e => {
+      console.log(e);
+      callback(e);
+    });
+}
