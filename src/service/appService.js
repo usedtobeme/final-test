@@ -71,7 +71,6 @@ export function changeStatus(e, callback) {
       callback(e);
     });
 }
-
 export function addNewDate(e, callback) {
   axios
     .post(url, e, {

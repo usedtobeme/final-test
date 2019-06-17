@@ -44,7 +44,6 @@ export default function Appointments(props) {
         end = new Date(e.appointment.end);
       }
     }
-
     var diff = (end - start) / 1000;
     diff /= 60;
     return `${Math.abs(Math.round(diff))} minutes`;
@@ -160,6 +159,10 @@ export default function Appointments(props) {
     ) : null;
   };
 
+  const renderModal = () => {
+    return null;
+  };
+
   return dates ? (
     <main className="main-container">
       <div className="today-appointments">
@@ -178,6 +181,7 @@ export default function Appointments(props) {
       </div>
 
       {renderButton()}
+      {renderModal()}
     </main>
   ) : null;
 }
