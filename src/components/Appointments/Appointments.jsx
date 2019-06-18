@@ -111,7 +111,7 @@ export default function Appointments(props) {
           <img src={e.avatar} className="avatar" alt="avatar" />
           <span>{`${e.first_name} ${e.last_name}`}</span>
           <i className="fas fa-map-marker-alt">
-            <span className="location">{e.location[0].place}</span>
+            <span className="location">{e.location.place}</span>
           </i>
         </div>
         <div className="date-status">
@@ -155,7 +155,7 @@ export default function Appointments(props) {
 
   const renderButton = () => {
     return dates ? (
-      <button onClick={() => setPages(pages + 2)}>Load more</button>
+      <button onClick={() => setPages(pages + 2)} className="button load-more">Load more</button>
     ) : null;
   };
 

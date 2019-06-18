@@ -1,6 +1,8 @@
 .main-container {
   position: absolute;
   width: 100%;
+  display: flex;
+  flex-direction: column;
   top: 80%;
 }
 .section-appointments {
@@ -196,7 +198,7 @@ $animation-speed: 1.2s;
       font-size: 12px;
       font-weight: 300;
       font-style: italic;
-      word-break:  break-word;
+      word-break: break-word;
       width: 35%;
     }
   }
@@ -220,7 +222,29 @@ $animation-speed: 1.2s;
 
   .upcoming-label {
     font-weight: 900;
-    font-size: 30px;
+    font-size: 20px;
     align-self: center;
   }
+}
+
+.button.load-more {
+  background: #1aab8a;
+  color: #fff;
+  border: none;
+  position: relative;
+  height: 40px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 800ms ease all;
+  outline: none;
+  width: 50%;
+  align-self: center;
+  margin-bottom: 2%;
+}
+.button.load-more:hover {
+  background: #fff;
+  color: #1aab8a;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  transition: 500ms ease all;
 }

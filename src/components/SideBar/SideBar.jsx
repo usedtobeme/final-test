@@ -4,16 +4,17 @@ import * as Service from "../../service/appService";
 const state = {
   first_name: "",
   last_name: "",
-  appointment: {},
-  location: [{}],
+  appointment: { start: "", end: "" },
+  location: { street: "", place: "" },
   avatar: "",
   phone: "",
-  topics: [],
+  topics: [{}],
   status: "pending"
 };
 
 export default function SideBar(props) {
-  const randomAvatar = "http://www.avatarpro.biz/avatar";
+  const { show, mode } = props;
+  const randomAvatar = "https://source.unsplash.com/random/100x100";
   const [avatar, setAvatar] = useState();
 
   const [newDate, setNewDate] = useState(state);
@@ -24,31 +25,46 @@ export default function SideBar(props) {
     });
   }, []);
 
+  useEffect(() => {}, []);
+
   const onChange = e => {
     const { name, value } = e.target;
     const parent = e.target.getAttribute("parent");
-    if (parent === "location") {
-      newDate.location[0][name] = value;
-    } else if (parent === "appointment") {
-      newDate.appointment[name] = new Date(value).getTime();
+
+    if (parent) {
+      setNewDate({
+        ...newDate,
+        [parent]: {
+          ...newDate[parent],
+          [name]: parent === "location" ? value : new Date(value).getTime()
+        }
+      });
     } else {
       setNewDate({ ...newDate, [name]: value });
     }
+    console.log(newDate);
   };
 
   const onSubmit = e => {
     e.preventDefault();
     newDate.avatar = randomAvatar;
+
     Service.addNewDate(newDate, res => {
       console.log(res);
     });
   };
 
-  //   (() => {
-  //     for (let i = 1001; i < 1050; i++) {
-  //       Service.deleteUser(i, () => null);
-  //     }
-  //   })();
+  const setTopics = e => {
+    const { value } = e.target;
+    const topics = value.split(",").map(e => ({ topic: e }));
+    setNewDate({ ...newDate, topics: topics });
+  };
+
+  // (() => {
+  //   for (let i = 1001; i < 1050; i++) {
+  //     Service.deleteUser(i, () => null);
+  //   }
+  // })();
 
   return (
     <div className="backdropStyle">
@@ -67,55 +83,95 @@ export default function SideBar(props) {
           </div>
         </div>
         <form className="form" type="submit" onSubmit={onSubmit}>
-          <div className="date-name">
+          <div className="form-section date-firstname">
             <span>First Name</span>
-            <input type="text" onChange={onChange} name="first_name" />
+            <input
+              type="text"
+              onChange={onChange}
+              name="first_name"
+              placeholder="E.g. Jon"
+              value={newDate.first_name}
+              required
+            />
           </div>
-          <div className="date-name">
+          <div className="form-section date-lastname">
             <span>Last Name</span>
-            <input type="text" onChange={onChange} name="last_name" />
+            <input
+              type="text"
+              onChange={onChange}
+              name="last_name"
+              placeholder="E.g. Snow"
+              value={newDate.last_name}
+              required
+            />
           </div>
-          <div className="date-name">
+          <div className="form-section date-phone">
             <span>Phone</span>
-            <input type="text" onChange={onChange} name="phone" />
+            <input
+              type="text"
+              onChange={onChange}
+              name="phone"
+              placeholder="E.g. 111-222-333"
+              value={newDate.phone}
+              required
+            />
           </div>
-          <div className="date-name">
+          <div className="form-section date-place">
             <span>Place</span>
             <input
               type="text"
               onChange={onChange}
               name="place"
               parent="location"
+              placeholder="E.g. Kings Landing"
+              value={newDate.location.place}
+              required
             />
           </div>
-          <div className="date-name">
+          <div className="form-section date-street">
             <span>Street</span>
             <input
               type="text"
               onChange={onChange}
               name="street"
               parent="location"
+              placeholder="E.g. Shame street"
+              value={newDate.location.street}
+              required
             />
           </div>
-          <div className="date-name">
+          <div className="form-section date-start">
             <span>Start</span>
             <input
               type="datetime-local"
               onChange={onChange}
               name="start"
               parent="appointment"
+              min={new Date().getTime()}
+              required
             />
+          </div>
+          <div className="form-section date-end">
             <span>End</span>
             <input
               type="datetime-local"
               onChange={onChange}
               name="end"
               parent="appointment"
+              min={new Date(newDate.appointment.start + 30*60000)}
+              required
             />
           </div>
-          <div className="date-name">
+          <div className="form-section date-topics">
             <span>Topics</span>
-            <input type="text" onChange={onChange} name="topics" />
+            <input
+              type="text"
+              onChange={setTopics}
+              name="topics"
+              placeholder="E.g night,terrors,dragons"
+              value={newDate.topics.map(e => e.topic)}
+              required
+            />
           </div>
           <button type="submit">Submit</button>
         </form>

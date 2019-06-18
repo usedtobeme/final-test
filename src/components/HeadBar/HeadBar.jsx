@@ -18,9 +18,6 @@ export default function HeadBar() {
     });
   }, []);
 
-
-  
-
   const mainUser = () => (defaultUser ? defaultUser : "");
 
   return (
@@ -47,10 +44,12 @@ export default function HeadBar() {
             <i className="navigation__list__item far fa-thumbs-up" />
           </li>
           <li>
-            <i className="navigation__list__item fas fa-history" />
+            <i className="navigation__list__item  far fa-bell">
+              <i className="far fa-circle" />
+            </i>
           </li>
           <li>
-            <i className="navigation__list__item fab fa-js-square" />
+            <i className="navigation__list__item fas fa-history" />
           </li>
         </ul>
       </nav>
