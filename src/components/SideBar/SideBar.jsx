@@ -13,7 +13,7 @@ const state = {
 };
 
 export default function SideBar(props) {
-  const { show, mode } = props;
+ const { close} = props;
   const randomAvatar = "https://source.unsplash.com/random/100x100";
   const [avatar, setAvatar] = useState();
 
@@ -42,7 +42,6 @@ export default function SideBar(props) {
     } else {
       setNewDate({ ...newDate, [name]: value });
     }
-    console.log(newDate);
   };
 
   const onSubmit = e => {
@@ -67,113 +66,120 @@ export default function SideBar(props) {
   // })();
 
   return (
-    <div className="backdropStyle">
-      <div className="modalStyle">
-        <div className="modal-details">
-          <span className="modal-label">Klatsch Details</span>
+    <div className='backdropStyle'>
+      <div className='modalStyle'>
+        <div className='modal-details'>
+          <span className='modal-label'>Klatsch Details</span>
           <span className={`date-status__status pending`}>Pending</span>
-          <div className="users-info">
+          <div className='users-info'>
             <img
               src={newDate.avavtar ? newDate.avatar : avatar}
-              alt="user avavatar"
-              className="user-avatar"
+              alt='user avavatar'
+              className='user-avatar'
             />
-            <i className="fas fa-mug-hot" />
-            <i className="fas fa-question" />
+            <i className='fas fa-mug-hot' />
+            <i className='fas fa-question' />
           </div>
         </div>
-        <form className="form" type="submit" onSubmit={onSubmit}>
-          <div className="form-section date-firstname">
+        <form className='form' type='submit' onSubmit={onSubmit}>
+          <div className='form-section date-firstname'>
             <span>First Name</span>
             <input
-              type="text"
+              type='text'
               onChange={onChange}
-              name="first_name"
-              placeholder="E.g. Jon"
+              name='first_name'
+              placeholder='E.g. Jon'
               value={newDate.first_name}
               required
             />
           </div>
-          <div className="form-section date-lastname">
+          <div className='form-section date-lastname'>
             <span>Last Name</span>
             <input
-              type="text"
+              type='text'
               onChange={onChange}
-              name="last_name"
-              placeholder="E.g. Snow"
+              name='last_name'
+              placeholder='E.g. Snow'
               value={newDate.last_name}
               required
             />
           </div>
-          <div className="form-section date-phone">
+          <div className='form-section date-phone'>
             <span>Phone</span>
             <input
-              type="text"
+              type='text'
               onChange={onChange}
-              name="phone"
-              placeholder="E.g. 111-222-333"
+              name='phone'
+              placeholder='E.g. 111-222-333'
               value={newDate.phone}
               required
             />
           </div>
-          <div className="form-section date-place">
+          <div className='form-section date-place'>
             <span>Place</span>
             <input
-              type="text"
+              type='text'
               onChange={onChange}
-              name="place"
-              parent="location"
-              placeholder="E.g. Kings Landing"
+              name='place'
+              parent='location'
+              placeholder='E.g. Kings Landing'
               value={newDate.location.place}
               required
             />
           </div>
-          <div className="form-section date-street">
+          <div className='form-section date-street'>
             <span>Street</span>
             <input
-              type="text"
+              type='text'
               onChange={onChange}
-              name="street"
-              parent="location"
-              placeholder="E.g. Shame street"
+              name='street'
+              parent='location'
+              placeholder='E.g. Shame street'
               value={newDate.location.street}
               required
             />
           </div>
-          <div className="form-section date-start">
+          <div className='form-section date-start'>
             <span>Start</span>
             <input
-              type="datetime-local"
+              type='datetime-local'
               onChange={onChange}
-              name="start"
-              parent="appointment"
+              name='start'
+              parent='appointment'
               min={new Date().getTime()}
               required
             />
           </div>
-          <div className="form-section date-end">
+          <div className='form-section date-end'>
             <span>End</span>
             <input
-              type="datetime-local"
+              type='datetime-local'
               onChange={onChange}
-              name="end"
-              parent="appointment"
-              min={new Date(newDate.appointment.start + 30*60000)}
+              name='end'
+              parent='appointment'
+              min={new Date(newDate.appointment.start + 30 * 60000)}
               required
             />
           </div>
-          <div className="form-section date-topics">
+          <div className='form-section date-topics'>
             <span>Topics</span>
             <input
-              type="text"
+              type='text'
               onChange={setTopics}
-              name="topics"
-              placeholder="E.g night,terrors,dragons"
+              name='topics'
+              placeholder='E.g night,terrors,dragons'
               value={newDate.topics.map(e => e.topic)}
               required
             />
           </div>
-          <button type="submit">Submit</button>
+          <div className='button-container'>
+            <button type='submit' className='submit-button'>
+              Submit
+            </button>
+            <button className='cancel-button'onClick={()=>{close()}} >
+              Cancel
+            </button>
+          </div>
         </form>
       </div>
     </div>

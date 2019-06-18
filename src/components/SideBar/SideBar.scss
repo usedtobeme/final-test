@@ -1,11 +1,12 @@
 .backdropStyle {
   position: fixed;
-  top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.3);
   padding: 50px;
+  transition: 500ms all;
+  height: 100vh;
 }
 
 .modalStyle {
@@ -19,6 +20,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%,-41%);
 }
 .modal-details {
   height: 20vh;
@@ -101,4 +106,35 @@
 }
 .form-section span {
   width: 30%;
+}
+
+.button-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.submit-button {
+  background: #1aab8a;
+  color: #fff;
+  border: none;
+  position: relative;
+  height: 30px;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+  width: 40%;
+  align-self: center;
+  margin-top: 5%;
+}
+.submit-button:hover {
+  background: #fff;
+  color: #1aab8a;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  transition: 500ms ease all;
+}
+
+.cancel-button {
+  @extend .submit-button;
+  background: #900c3e;
 }
