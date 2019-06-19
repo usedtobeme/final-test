@@ -33,6 +33,7 @@
   height: 50px;
   padding: 0;
   align-items: flex-start;
+  max-width: 100%;
 }
 .button {
   width: 100%;
@@ -86,6 +87,11 @@
   height: 58px;
   border-radius: 25px;
   margin-top: 10px;
+}
+
+.addDatebtn:active {
+  width: 40%;
+  height: 48px;
 }
 .addDatebtn:hover {
   background-image: linear-gradient(to bottom, #5ace9f, #5acea0);

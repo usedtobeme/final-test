@@ -4,7 +4,7 @@ import * as Service from "../../service/appService";
 import { Months } from "../../constants";
 
 export default function Appointments(props) {
-  const { filter } = props;
+  const { filter,show } = props;
   const [dates, setDates] = useState();
   const [pages, setPages] = useState(3);
   const [force, setforce] = useState(false);
@@ -18,7 +18,7 @@ export default function Appointments(props) {
     Service.getFiltered(params, pages, e => {
       setDates(e);
     });
-  }, [pages, filter, force]);
+  }, [pages, filter, force,show]);
 
   const formatDate = e => {
     const start = new Date(e.appointment.start);

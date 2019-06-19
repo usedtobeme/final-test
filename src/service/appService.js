@@ -2,6 +2,7 @@ import axios from "axios";
 
 const url = "https://klatsch.herokuapp.com/users";
 const urlUser = "https://5cfe634cca949b00148d40ab.mockapi.io/user";
+const urlAvatar = "https://randomuser.me/api/?gender=";
 
 export function getAll(callback) {
   axios
@@ -11,7 +12,6 @@ export function getAll(callback) {
     })
     .catch(e => {
       console.log(e);
-      callback(e);
     });
 }
 
@@ -22,17 +22,15 @@ export function getFiltered(criteria, i, callback) {
       criteria[3]
     }`;
   }
-
   axios
     .get(
       `${url}?_sort=appointment.start&_order=asc&_page=1&_limit=${i}${params}&appointment.start_gte=${new Date().getTime()}`
     )
     .then(res => {
-      callback(res.data);
+      callback(res.data)
     })
     .catch(e => {
       console.log(e);
-      callback(e);
     });
 }
 export function getId(id, callback) {
@@ -55,7 +53,6 @@ export function getUser(callback) {
     })
     .catch(e => {
       console.log(e);
-      callback(e);
     });
 }
 export function changeStatus(e, callback) {
@@ -68,7 +65,6 @@ export function changeStatus(e, callback) {
     })
     .catch(e => {
       console.log(e);
-      callback(e);
     });
 }
 export function addNewDate(e, callback) {
@@ -81,7 +77,6 @@ export function addNewDate(e, callback) {
     })
     .catch(e => {
       console.log(e);
-      callback(e);
     });
 }
 export function deleteUser(id, callback) {
@@ -92,6 +87,16 @@ export function deleteUser(id, callback) {
     })
     .catch(e => {
       console.log(e);
-      callback(e);
+    });
+}
+
+export function randomAvatar(gender, callback) {
+  axios
+    .get(`${urlAvatar}${gender}`)
+    .then(res => {
+      callback(res.data.results[0].picture.medium);
+    })
+    .catch(e => {
+      console.log(e);
     });
 }
