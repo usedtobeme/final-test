@@ -59,7 +59,7 @@
 .users-info {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   width: 70%;
 }
 .fa-mug-hot {
@@ -67,6 +67,7 @@
 }
 .fa-question {
   font-size: 28px;
+  cursor: pointer;
 }
 
 .form {
@@ -135,4 +136,60 @@
 .cancel-button {
   @extend .submit-button;
   background: #900c3e;
+}
+
+.avatar-form {
+  width: 15%;
+  .image-input {
+    display: none;
+  }
+}
+
+.date-avatar {
+  display: flex;
+  flex-direction: column;
+  font-size: 11px;
+}
+
+.sideBar-status {
+  &__status {
+    display: list-item;
+    color: #4990e2;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  &__status.pending {
+    color: #fca023;
+  }
+  &__status.cancelled {
+    color: #f66972;
+  }
+}
+.curr-users-info {
+  @extend .users-info;
+  flex-direction: column;
+  height: 12vh;
+  .curr-first-info{
+    span:first-child(){
+      font-weight: 800;
+      margin:5px 0;
+    }
+    span:nth-child(2){
+      color:rgba(0, 0, 0, 0.5);
+    }
+  }
+}
+.curr-avatars {
+  display: flex;
+  align-items: center;
+}
+.curr-first-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.curr-modal-details {
+  @extend .modal-details;
+  height: 25vh;
 }

@@ -13,6 +13,7 @@ const state = {
 export default function FilteredPanel() {
   const [selected, setSelected] = useState(state);
   const [show, setShow] = useState(false);
+  const [id, setId] = useState();
 
   useEffect(() => {
     const items = Object.entries(selected).filter(e => e[0] !== "All" && e[1]);
@@ -21,41 +22,46 @@ export default function FilteredPanel() {
   }, [selected]);
 
   const renderModal = () => {
-    return show ? <Sidebar close={close} /> : null;
+    return show ? <Sidebar close={close} id={id} /> : null;
   };
 
   const close = () => {
     setShow(!show);
+    setId(undefined);
+  };
+
+  const getId = e => {
+    setId(e);
+    setShow(!show);
   };
 
   return (
-    <div aria-label="modal-container">
-      <section className="section-filters">
-        <div className="combobox-container" name="select-filters">
-          <span className="show-only">Show only:</span>
-          <ul aria-label="filter-options" className="filter-options">
-            <li className="list-item">
+    <div aria-label='modal-container'>
+      <section className='section-filters'>
+        <div className='combobox-container' name='select-filters'>
+          <span className='show-only'>Show only:</span>
+          <ul aria-label='filter-options' className='filter-options'>
+            <li className='list-item'>
               <button
                 className={
                   selected.All
                     ? "button list-item__button"
                     : "button list-item__button-deactivated"
                 }
-                value="All"
+                value='All'
                 onClick={() => setSelected(state)}
-                aria-label="show all dates"
-              >
+                aria-label='show all dates'>
                 All
               </button>
             </li>
-            <li className="list-item" value="confirmed">
+            <li className='list-item' value='confirmed'>
               <button
                 className={
                   selected.confirmed
                     ? "button list-item__button"
                     : "button list-item__button-deactivated"
                 }
-                value="Confirmed"
+                value='Confirmed'
                 onClick={() =>
                   setSelected({
                     ...selected,
@@ -63,20 +69,19 @@ export default function FilteredPanel() {
                     All: false
                   })
                 }
-                aria-label="filter confirmed dates"
-              >
+                aria-label='filter confirmed dates'>
                 Confirmed
-                <i className="filter fas fa-check" />
+                <i className='filter fas fa-check' />
               </button>
             </li>
-            <li className="list-item">
+            <li className='list-item'>
               <button
                 className={
                   selected.pending
                     ? "button list-item__button"
                     : "button list-item__button-deactivated"
                 }
-                value="p"
+                value='p'
                 onClick={() =>
                   setSelected({
                     ...selected,
@@ -84,20 +89,19 @@ export default function FilteredPanel() {
                     All: false
                   })
                 }
-                aria-label="filter pending dates"
-              >
+                aria-label='filter pending dates'>
                 Pending
-                <i className="far fa-clock" />
+                <i className='far fa-clock' />
               </button>
             </li>
-            <li className="list-item">
+            <li className='list-item'>
               <button
                 className={
                   selected.cancelled
                     ? "button list-item__button"
                     : "button list-item__button-deactivated"
                 }
-                value="Cancelled"
+                value='Cancelled'
                 onClick={() =>
                   setSelected({
                     ...selected,
@@ -105,24 +109,22 @@ export default function FilteredPanel() {
                     All: false
                   })
                 }
-                aria-label="filter canceled dates"
-              >
+                aria-label='filter canceled dates'>
                 Cancelled
-                <i className="fa fa-times" />
+                <i className='fa fa-times' />
               </button>
             </li>
           </ul>
         </div>
         <button
-          className="addDatebtn"
+          className='addDatebtn'
           onClick={() => {
             setShow(!show);
-          }}
-        >
-          <i className="fas fa-coffee" />
+          }}>
+          <i className='fas fa-coffee' />
           Add Klatsch
         </button>
-        <Appointments filter={selected} show={show} />
+        <Appointments filter={selected} show={show} getElement={getId} />
       </section>
       {renderModal()}
     </div>

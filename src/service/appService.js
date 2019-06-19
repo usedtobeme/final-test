@@ -27,7 +27,7 @@ export function getFiltered(criteria, i, callback) {
       `${url}?_sort=appointment.start&_order=asc&_page=1&_limit=${i}${params}&appointment.start_gte=${new Date().getTime()}`
     )
     .then(res => {
-      callback(res.data)
+      callback(res.data);
     })
     .catch(e => {
       console.log(e);
@@ -95,6 +95,19 @@ export function randomAvatar(gender, callback) {
     .get(`${urlAvatar}${gender}`)
     .then(res => {
       callback(res.data.results[0].picture.medium);
+    })
+    .catch(e => {
+      console.log(e);
+    });
+}
+
+export function uploadImg(data, callback) {
+  axios
+    .post(` https://api.imgur.com/3/image`, data, {
+      headers: { Authorization: "Client-ID 49c2dfff60bcd5c" }
+    })
+    .then(res => {
+      callback(res);
     })
     .catch(e => {
       console.log(e);
