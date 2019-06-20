@@ -1,32 +1,29 @@
-import React, { useState, useEffect } from "react";
-import * as Service from "../../service/appService";
-import "./HeadBarStyle.scss";
+import React, { useState, useEffect } from 'react'
+import * as Service from '../../service/appService'
+import './HeadBarStyle.scss'
 
 export default function HeadBar() {
   const classes = {
-    navigation: "navigation-show",
-    list: "navigation-show__list-show",
-    navigation2: "navigation",
-    list2: "navigation__list"
-  };
-  const [defaultUser, setDefaultUser] = useState();
-  const [show, setShow] = useState(false);
+    navigation: 'navigation-show',
+    list: 'navigation-show__list-show',
+    navigation2: 'navigation',
+    list2: 'navigation__list',
+  }
+  const [defaultUser, setDefaultUser] = useState()
+  const [show, setShow] = useState(false)
 
   useEffect(() => {
     Service.getUser(e => {
-      setDefaultUser(e.data[0]);
-    });
-  }, []);
+      setDefaultUser(e.data[0])
+    })
+  }, [])
 
-
-  
-
-  const mainUser = () => (defaultUser ? defaultUser : "");
+  const mainUser = () => (defaultUser ? defaultUser : '')
 
   return (
     <header className="header">
       <div
-        className={show ? "shadow-show" : "shadow-hide"}
+        className={show ? 'shadow-show' : 'shadow-hide'}
         onClick={() => setShow(!show)}
       />
       <nav
@@ -47,10 +44,12 @@ export default function HeadBar() {
             <i className="navigation__list__item far fa-thumbs-up" />
           </li>
           <li>
-            <i className="navigation__list__item fas fa-history" />
+            <i className="navigation__list__item  far fa-bell">
+              <i className="far fa-circle" />
+            </i>
           </li>
           <li>
-            <i className="navigation__list__item fab fa-js-square" />
+            <i className="navigation__list__item fas fa-history" />
           </li>
         </ul>
       </nav>
@@ -68,7 +67,7 @@ export default function HeadBar() {
       </div>
       <button className="hidden-button">
         <div
-          className={show ? "burger-menu open" : "burger-menu"}
+          className={show ? 'burger-menu open' : 'burger-menu'}
           onClick={() => setShow(!show)}
         >
           <div className="bar1" key="b1" />
@@ -77,5 +76,5 @@ export default function HeadBar() {
         </div>
       </button>
     </header>
-  );
+  )
 }

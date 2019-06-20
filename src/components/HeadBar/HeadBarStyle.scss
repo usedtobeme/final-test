@@ -1,3 +1,7 @@
+#root {
+  height: 100vh;
+  box-sizing: border-box;
+}
 * {
   margin: 0;
   font-family: "Roboto", sans-serif;
@@ -139,7 +143,7 @@
 
 .fa-thumbs-up,
 .fa-history,
-.fa-js-square {
+.fa-bell {
   color: rgba(0, 0, 0, 0.5);
 }
 
@@ -147,4 +151,42 @@
   background: 0;
   outline: none;
   border: 0;
+}
+
+.fa-bell {
+  position: relative;
+}
+
+.fa-circle {
+  position: absolute;
+  font-size: 13px;
+  color: #5496d2;
+  background-color: #5496d2;
+  border-radius: 50%;
+  left: 54%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fa-circle::after {
+  position: absolute;
+  color: white;
+  font-size: 10px;
+  content: "3";
+}
+
+@media (min-width: 960px) {
+  .burger-menu {
+    display: none;
+  }
+  .hidden-button {
+    display: none;
+  }
+  .avatar-name{
+    width:10%;
+    h3{
+      width: 100%;
+    }
+  }
 }

@@ -4,7 +4,7 @@ import * as Service from "../../service/appService";
 import { Months } from "../../constants";
 
 export default function Appointments(props) {
-  const { filter } = props;
+  const { filter, show, getElement, edit } = props;
   const [dates, setDates] = useState();
   const [pages, setPages] = useState(3);
   const [force, setforce] = useState(false);
@@ -18,7 +18,7 @@ export default function Appointments(props) {
     Service.getFiltered(params, pages, e => {
       setDates(e);
     });
-  }, [pages, filter, force]);
+  }, [pages, filter, force, show]);
 
   const formatDate = e => {
     const start = new Date(e.appointment.start);
@@ -88,19 +88,37 @@ export default function Appointments(props) {
     });
   };
 
-  const confirmDate = e => {
+  const confirmDate = (r,e) => {
+    r.stopPropagation();
     e.status = "confirmed ";
     Service.changeStatus(e, () => {
       setforce(!force);
     });
   };
 
+  const clickAppointment = e => {
+    e.preventDefault();
+    if (
+      !e.target.getAttribute("class").includes("times") ||
+      e.target.getAttribute("class").includes("check")
+    ) {
+      console.log('d')
+      const id = e.currentTarget.getAttribute("element");
+      if (id) getElement(id);
+    }
+  };
+
   const markup = (e, index) => (
-    <section className={`section-appointments ${e.status}`} key={index}>
+    <section
+      className={`section-appointments ${e.status}`}
+      key={index}
+      onClick={clickAppointment}
+      element={e.id}
+    >
       <section className={`section-appointments__time ${e.status}`}>
         <div className="time">
           <span className="time__hour">
-            <span>{formatDate(e)}</span>
+            <span className={"date-time-span"}>{formatDate(e)}</span>
           </span>
           <span className="time__duration">{getDuration(e)}</span>
           <div className="time__separator" />
@@ -109,9 +127,9 @@ export default function Appointments(props) {
       <section className="section-appointments__info">
         <div className={`personal-info ${e.status}`}>
           <img src={e.avatar} className="avatar" alt="avatar" />
-          <span>{`${e.first_name} ${e.last_name}`}</span>
+          <span className="date-name">{`${e.first_name} ${e.last_name}`}</span>
           <i className="fas fa-map-marker-alt">
-            <span className="location">{e.location[0].place}</span>
+            <span className="location">{e.location.place}</span>
           </i>
         </div>
         <div className="date-status">
@@ -127,11 +145,11 @@ export default function Appointments(props) {
               <button className="hidden-button">
                 <i
                   className="appointment fas fa-check"
-                  onClick={() => confirmDate(e)}
+                  onClick={(r) => confirmDate(r,e)}
                 />
               </button>
             ) : (
-              <i className="fas fa-edit" />
+              <i className="fas fa-edit" onClick={() => edit()} />
             )}
             <i className="fas fa-times" onClick={() => cancelDate(e)} />
           </div>
@@ -155,16 +173,14 @@ export default function Appointments(props) {
 
   const renderButton = () => {
     return dates ? (
-      <button onClick={() => setPages(pages + 2)}>Load more</button>
+      <button onClick={() => setPages(pages + 2)} className="button load-more">
+        Load more
+      </button>
     ) : null;
   };
 
-  const renderModal = () => {
-    return null;
-  };
-
   return dates ? (
-    <main className="main-container">
+    <section className="main-container">
       <div className="today-appointments">
         <div className="today-info">
           <span className="today-label">Today</span>
@@ -179,9 +195,7 @@ export default function Appointments(props) {
         <span className="upcoming-label">Upcoming</span>
         {renderUpcoming()}
       </div>
-
       {renderButton()}
-      {renderModal()}
-    </main>
+    </section>
   ) : null;
 }
