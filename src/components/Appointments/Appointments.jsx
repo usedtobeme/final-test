@@ -4,7 +4,7 @@ import * as Service from "../../service/appService";
 import { Months } from "../../constants";
 
 export default function Appointments(props) {
-  const { filter, show, getElement } = props;
+  const { filter, show, getElement, edit } = props;
   const [dates, setDates] = useState();
   const [pages, setPages] = useState(3);
   const [force, setforce] = useState(false);
@@ -97,8 +97,10 @@ export default function Appointments(props) {
 
   const clickAppointment = e => {
     e.preventDefault();
-    console.log(e.target)
-    if (!e.target.getAttribute("class").includes("fas")) {
+    if (
+      !e.target.getAttribute("class").includes("times") ||
+      e.target.getAttribute("class").includes("check")
+    ) {
       const id = e.currentTarget.getAttribute("element");
       if (id) getElement(id);
     }
@@ -109,44 +111,45 @@ export default function Appointments(props) {
       className={`section-appointments ${e.status}`}
       key={index}
       onClick={clickAppointment}
-      element={e.id}>
+      element={e.id}
+    >
       <section className={`section-appointments__time ${e.status}`}>
-        <div className='time'>
-          <span className='time__hour'>
-            <span className={'date-time-span'}>{formatDate(e)}</span>
+        <div className="time">
+          <span className="time__hour">
+            <span className={"date-time-span"}>{formatDate(e)}</span>
           </span>
-          <span className='time__duration'>{getDuration(e)}</span>
-          <div className='time__separator' />
+          <span className="time__duration">{getDuration(e)}</span>
+          <div className="time__separator" />
         </div>
       </section>
-      <section className='section-appointments__info'>
+      <section className="section-appointments__info">
         <div className={`personal-info ${e.status}`}>
-          <img src={e.avatar} className='avatar' alt='avatar' />
+          <img src={e.avatar} className="avatar" alt="avatar" />
           <span className="date-name">{`${e.first_name} ${e.last_name}`}</span>
-          <i className='fas fa-map-marker-alt'>
-            <span className='location'>{e.location.place}</span>
+          <i className="fas fa-map-marker-alt">
+            <span className="location">{e.location.place}</span>
           </i>
         </div>
-        <div className='date-status'>
+        <div className="date-status">
           <span className={`date-status__date ${e.status}`}>{getMonth(e)}</span>
           <span className={`date-status__status ${e.status}`}>{e.status}</span>
         </div>
       </section>
 
-      <section className='section-appointments__actions'>
+      <section className="section-appointments__actions">
         {e.status === "cancelled" ? null : (
-          <div className='actions-icons'>
+          <div className="actions-icons">
             {e.status === "pending" ? (
-              <button className='hidden-button'>
+              <button className="hidden-button">
                 <i
-                  className='appointment fas fa-check'
+                  className="appointment fas fa-check"
                   onClick={() => confirmDate(e)}
                 />
               </button>
             ) : (
-              <i className='fas fa-edit' />
+              <i className="fas fa-edit" onClick={() => edit()} />
             )}
-            <i className='fas fa-times' onClick={() => cancelDate(e)} />
+            <i className="fas fa-times" onClick={() => cancelDate(e)} />
           </div>
         )}
       </section>
@@ -168,26 +171,26 @@ export default function Appointments(props) {
 
   const renderButton = () => {
     return dates ? (
-      <button onClick={() => setPages(pages + 2)} className='button load-more'>
+      <button onClick={() => setPages(pages + 2)} className="button load-more">
         Load more
       </button>
     ) : null;
   };
 
   return dates ? (
-    <section className='main-container'>
-      <div className='today-appointments'>
-        <div className='today-info'>
-          <span className='today-label'>Today</span>
-          <span className='next-appointment'>{`next meeting in ${getDuration(
+    <section className="main-container">
+      <div className="today-appointments">
+        <div className="today-info">
+          <span className="today-label">Today</span>
+          <span className="next-appointment">{`next meeting in ${getDuration(
             "duration"
           )}`}</span>
         </div>
         {renderToday()}
-        <div className='today-separator' />
+        <div className="today-separator" />
       </div>
-      <div className='upcoming-appointments'>
-        <span className='upcoming-label'>Upcoming</span>
+      <div className="upcoming-appointments">
+        <span className="upcoming-label">Upcoming</span>
         {renderUpcoming()}
       </div>
       {renderButton()}

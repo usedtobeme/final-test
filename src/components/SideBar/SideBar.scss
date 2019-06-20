@@ -11,7 +11,7 @@
 
 .modalStyle {
   background-color: #fff;
-  border-radius: 5px;
+  border-radius: 25px;
   width: 75%;
   margin: 0 auto;
   padding: 15px;
@@ -54,6 +54,7 @@
   align-self: center;
   margin-right: 1%;
   height: 40px;
+  background-color: lightblue;
 }
 
 .users-info {
@@ -169,14 +170,15 @@
 .curr-users-info {
   @extend .users-info;
   flex-direction: column;
-  height: 12vh;
-  .curr-first-info{
-    span:first-child(){
+  justify-content: space-between;
+  height: 14vh;
+  .curr-first-info {
+    span:first-child() {
       font-weight: 800;
-      margin:5px 0;
+      margin: 5px 0;
     }
-    span:nth-child(2){
-      color:rgba(0, 0, 0, 0.5);
+    span:nth-child(2) {
+      color: rgba(0, 0, 0, 0.5);
     }
   }
 }
@@ -192,4 +194,66 @@
 .curr-modal-details {
   @extend .modal-details;
   height: 25vh;
+}
+
+.second-panel {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 25vh;
+  &--container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 0 5%;
+    height: 4.5vh;
+  }
+  .panel-location {
+    height: 7vh;
+  }
+  &--label {
+    font-weight: 900;
+  }
+  &--value {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 13px;
+  }
+  &--second-label {
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: 900;
+    font-size: 13px;
+  }
+  &--topics {
+    font-size: 12px;
+  }
+  .topics-container {
+    display: flex;
+    word-break: break-word;
+    flex-wrap: wrap;
+  }
+  &--container.panel-status {
+    justify-content: center;
+  }
+}
+
+.third-panel {
+  &--container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 10vh;
+  }
+  &--actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    .action {
+      cursor: pointer;
+      color: rgba(0, 0, 0, 0.5);
+      text-decoration: underline;
+
+    }
+  }
 }

@@ -1,29 +1,29 @@
-import React, { useState, useEffect } from "react";
-import * as Service from "../../service/appService";
-import "./HeadBarStyle.scss";
+import React, { useState, useEffect } from 'react'
+import * as Service from '../../service/appService'
+import './HeadBarStyle.scss'
 
 export default function HeadBar() {
   const classes = {
-    navigation: "navigation-show",
-    list: "navigation-show__list-show",
-    navigation2: "navigation",
-    list2: "navigation__list"
-  };
-  const [defaultUser, setDefaultUser] = useState();
-  const [show, setShow] = useState(false);
+    navigation: 'navigation-show',
+    list: 'navigation-show__list-show',
+    navigation2: 'navigation',
+    list2: 'navigation__list',
+  }
+  const [defaultUser, setDefaultUser] = useState()
+  const [show, setShow] = useState(false)
 
   useEffect(() => {
     Service.getUser(e => {
-      setDefaultUser(e.data[0]);
-    });
-  }, []);
+      setDefaultUser(e.data[0])
+    })
+  }, [])
 
-  const mainUser = () => (defaultUser ? defaultUser : "");
+  const mainUser = () => (defaultUser ? defaultUser : '')
 
   return (
     <header className="header">
       <div
-        className={show ? "shadow-show" : "shadow-hide"}
+        className={show ? 'shadow-show' : 'shadow-hide'}
         onClick={() => setShow(!show)}
       />
       <nav
@@ -67,7 +67,7 @@ export default function HeadBar() {
       </div>
       <button className="hidden-button">
         <div
-          className={show ? "burger-menu open" : "burger-menu"}
+          className={show ? 'burger-menu open' : 'burger-menu'}
           onClick={() => setShow(!show)}
         >
           <div className="bar1" key="b1" />
@@ -76,5 +76,5 @@ export default function HeadBar() {
         </div>
       </button>
     </header>
-  );
+  )
 }
