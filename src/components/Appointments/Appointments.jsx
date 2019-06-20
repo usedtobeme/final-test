@@ -88,7 +88,8 @@ export default function Appointments(props) {
     });
   };
 
-  const confirmDate = e => {
+  const confirmDate = (r,e) => {
+    r.stopPropagation();
     e.status = "confirmed ";
     Service.changeStatus(e, () => {
       setforce(!force);
@@ -101,6 +102,7 @@ export default function Appointments(props) {
       !e.target.getAttribute("class").includes("times") ||
       e.target.getAttribute("class").includes("check")
     ) {
+      console.log('d')
       const id = e.currentTarget.getAttribute("element");
       if (id) getElement(id);
     }
@@ -143,7 +145,7 @@ export default function Appointments(props) {
               <button className="hidden-button">
                 <i
                   className="appointment fas fa-check"
-                  onClick={() => confirmDate(e)}
+                  onClick={(r) => confirmDate(r,e)}
                 />
               </button>
             ) : (
