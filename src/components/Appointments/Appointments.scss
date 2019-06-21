@@ -310,6 +310,9 @@
     &__time {
       width: 10%;
       max-width: 10%;
+      .time{
+        font-size: 16px;
+      }
     }
     &__info {
       font-size: 16px;

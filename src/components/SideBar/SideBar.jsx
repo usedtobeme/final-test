@@ -91,6 +91,9 @@ export default function SideBar(props) {
       });
     else {
       Service.changeStatus(newDate, res => {
+        changeEdit("false");
+        setforce(!force);
+        setCurrDate(newDate);
         if (res.status === 201 && wdith < 960) close();
       });
     }
@@ -222,7 +225,7 @@ export default function SideBar(props) {
     ) : null;
 
   const addNew = () =>
-    currDate || !edit ? (
+    (currDate && currDate.status !== "cancelled") || !edit ? (
       <aside className='backdropStyle'>
         <div className='modalStyle'>
           <div className='modal-details'>
