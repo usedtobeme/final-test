@@ -99,19 +99,19 @@ export default function Appointments(props) {
 
   const clickAppointment = e => {
     e.preventDefault();
-    if (e.target.getAttribute("class").includes("section-appointments")) {
+    if (e.target.getAttribute("class").includes("edit")) {
       const id = e.currentTarget.getAttribute("element");
       if (id) {
         setforce(!force);
         getElement(id);
-        edit("false");
+        edit("true");
       }
     } else {
       const id = e.currentTarget.getAttribute("element");
       if (id) {
         setforce(!force);
         getElement(id);
-        edit("true");
+        edit("false");
       }
     }
   };
