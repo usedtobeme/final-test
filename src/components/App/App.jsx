@@ -14,7 +14,6 @@ export default function App() {
     if (window.innerWidth < 960) setShow(e);
   }
   function changeHome(e) {
-    console.log("da");
     if (window.innerWidth < 960) setHome(e);
   }
 
