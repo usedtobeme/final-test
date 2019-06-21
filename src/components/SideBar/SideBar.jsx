@@ -126,6 +126,7 @@ export default function SideBar(props) {
     currDate.status = e;
     Service.changeStatus(currDate, () => {
       setforce(!force);
+      changeEdit("false");
     });
   };
   const preview = () =>
