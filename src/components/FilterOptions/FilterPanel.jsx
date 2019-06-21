@@ -10,11 +10,17 @@ const state = {
   cancelled: false
 };
 
-export default function FilteredPanel() {
+export default function FilteredPanel(props) {
+  const { home, setHome, setSideBar } = props;
   const [selected, setSelected] = useState(state);
   const [show, setShow] = useState(false);
   const [id, setId] = useState();
   const [edit, setEdit] = useState(false);
+  const [width, setWidth] = useState(window.innerWidth);
+
+  window.addEventListener("resize", () => {
+    setWidth(window.innerWidth);
+  });
 
   useEffect(() => {
     const items = Object.entries(selected).filter(e => e[0] !== "All" && e[1]);
@@ -22,35 +28,65 @@ export default function FilteredPanel() {
     if (items.length === 3 || items.length === 0) setSelected(state);
   }, [selected]);
 
-  useEffect(() => {}, [edit]);
+  useEffect(() => {
+    if (home) {
+      setHome(!home);
+      setShow(false);
+    }
+  }, [home, setHome]);
 
-  const renderModal = () => {
-    return show ? <Sidebar close={close} id={id} edit={edit} /> : null;
-  };
+  useEffect(() => {
+    if (width < 960) {
+      setSideBar(
+        show ? (
+          <Sidebar close={close} id={id} edit={edit} changeEdit={changeEdit} />
+        ) : null
+      );
+    } else {
+      setSideBar(
+        <Sidebar
+          close={close}
+          edit={edit}
+          id={id}
+          width={width}
+          changeEdit={changeEdit}
+        />
+      );
+    }
+  }, [show, edit, id, setSideBar, width]);
 
-  const close = () => {
-    console.log("a");
-    setShow(!show);
-    setEdit(false);
-    setId(undefined);
+  const close = e => {
+    if (e) {
+      setEdit(false);
+      setId(undefined);
+    } else {
+      setShow(false);
+      setEdit(false);
+      setId(undefined);
+      setSideBar(null);
+    }
   };
 
   const getId = e => {
-    console.log("b");
-
     setId(e);
     setShow(!show);
   };
 
-  const changeEdit = () => {
-    console.log("c");
-
-    setEdit(!edit);
-    setShow(!show);
+  const changeEdit = e => {
+    if (e === "true") {
+      setEdit(true);
+      setShow(true);
+    } else if (e === "false") {
+      setEdit(false);
+      setShow(!show);
+    } else {
+      setEdit(!edit);
+      setShow(!show);
+    }
   };
 
   return (
-    <div aria-label='modal-container'>
+    <div aria-label='modal-container' className='modal-container'>
       <section className='section-filters'>
         <div className='combobox-container' name='select-filters'>
           <span className='show-only'>Show only:</span>
@@ -95,7 +131,7 @@ export default function FilteredPanel() {
                     ? "button list-item__button"
                     : "button list-item__button-deactivated"
                 }
-                value='p'
+                value='Pending'
                 onClick={() =>
                   setSelected({
                     ...selected,
@@ -133,7 +169,9 @@ export default function FilteredPanel() {
         <button
           className='addDatebtn'
           onClick={() => {
-            setShow(!show);
+            setShow(true);
+            setEdit(false);
+            setId(undefined);
           }}>
           <i className='fas fa-coffee' />
           Add Klatsch
@@ -145,7 +183,6 @@ export default function FilteredPanel() {
           edit={changeEdit}
         />
       </section>
-      {renderModal()}
     </div>
   );
 }
