@@ -6,6 +6,7 @@
   flex-direction: column;
   justify-content: center;
   position: relative;
+  padding: 5% 0;
 }
 .combobox-container {
   height: 8vh;
@@ -33,6 +34,7 @@
   height: 50px;
   padding: 0;
   align-items: flex-start;
+  max-width: 100%;
 }
 .button {
   width: 100%;
@@ -45,6 +47,7 @@
   justify-content: space-evenly;
   color: white;
   font-weight: 300;
+  box-shadow: 0 0 3px;
   font-size: 11px;
   letter-spacing: 0.05em;
   align-items: center;
@@ -57,7 +60,7 @@
   width: 100px;
   height: 25px;
   &__button {
-    border: 1px solid white;
+    border: 1.5px solid white;
   }
   &__button-deactivated {
     border: 0;
@@ -84,15 +87,98 @@
   color: white;
   background-color: #5ace9f;
   height: 58px;
-  border-radius: 25px;
+  border-radius: 50px;
   margin-top: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0 2%;
+  align-items: center;
+}
+
+.addDatebtn:active {
+  border: 14px solid #1aab8a;
 }
 .addDatebtn:hover {
-  background-image: linear-gradient(to bottom, #5ace9f, #5acea0);
+  background: #fff;
+  color: #1aab8a;
+  border: 9px solid #1aab8a;
+  transition: 300ms ease all;
 }
 
 @media (min-width: 380px) {
   .section-filters {
     height: 25vh;
+  }
+}
+@media (min-width: 960px) {
+  .modal-container {
+    width: 77%;
+  }
+
+  .combobox-container {
+    width: 80%;
+    height: 6vh;
+    border-radius: 25px;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-left: 3%;
+
+    .filter-options {
+      align-items: center;
+      height: 6vh;
+      border-radius: 50px;
+      .list-item {
+        margin: 0 5px;
+        width: 85px;
+      }
+    }
+  }
+  .section-filters {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 3% 0;
+  }
+  .addDatebtn {
+    align-self: auto;
+    width: 20%;
+    height: 30%;
+    font-size: 11px;
+    margin: 0;
+    margin-right: 10%;
+  }
+  .show-only {
+    font-size: 11px;
+    height: 3vh;
+    font-weight: 300;
+    padding: 0;
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media (min-width: 1240px) {
+  .addDatebtn {
+    font-size: 16px;
+  }
+  .combobox-container {
+    width: 80%;
+    height: 6vh;
+    border-radius: 25px;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-left: 3%;
+
+    .filter-options {
+      align-items: center;
+      height: 6vh;
+      border-radius: 50px;
+      .list-item {
+        margin: 0 5px;
+        width: 100px;
+      }
+    }
   }
 }

@@ -1,6 +1,8 @@
 .main-container {
   position: absolute;
   width: 100%;
+  display: flex;
+  flex-direction: column;
   top: 80%;
 }
 .section-appointments {
@@ -17,7 +19,7 @@
     position: relative;
     display: flex;
     align-items: center;
-    width: 22%;
+    width: 25%;
     justify-content: flex-end;
 
     .time {
@@ -52,6 +54,10 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      .date-name {
+        text-align: center;
+        font-weight: 700;
+      }
     }
     .personal-info.cancelled {
       opacity: 0.5;
@@ -84,7 +90,7 @@
     }
     .fas.fa-map-marker-alt {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       font-size: 12px;
       margin: 3px 0 0 3px;
 
@@ -97,15 +103,18 @@
   &__actions {
     display: flex;
     align-items: center;
-    width: 22%;
+    width: 19%;
     justify-content: center;
     .actions-icons {
       display: flex;
       flex-direction: column;
       height: 30%;
       justify-content: space-between;
-      color: rgba(0, 0, 0, 0.5);
+      color: rgba(0, 0, 0, 0.3);
       align-items: center;
+      i {
+        cursor: pointer;
+      }
     }
   }
 }
@@ -117,65 +126,6 @@
   border-top: 7px solid #fca023;
 }
 
-$spinner-size: 2rem;
-$animation-speed: 1.2s;
-
-.load-container {
-  position: absolute;
-  left: 50%;
-  margin-top: 42%;
-  transform: translate(-50%, -50%);
-}
-
-.load {
-  span {
-    display: inline-block;
-    width: $spinner-size;
-    height: $spinner-size;
-    background-color: #000000;
-    border-radius: 50%;
-    -webkit-transform: scale(0);
-    transform: scale(0);
-    -webkit-animation: $animation-speed infinite bubble ease-in-out;
-    animation: $animation-speed infinite bubble ease-in-out;
-  }
-  span:nth-child(1) {
-    background-color: #900c3e;
-    -webkit-animation-delay: 0s;
-    animation-delay: 0s;
-  }
-  span:nth-child(2) {
-    background-color: #c70039;
-    -webkit-animation-delay: 0.2s;
-    animation-delay: 0.2s;
-  }
-  span:nth-child(3) {
-    background-color: #ff5733;
-    -webkit-animation-delay: 0.4s;
-    animation-delay: 0.4s;
-  }
-  span:nth-child(4) {
-    background-color: #ff9800;
-    -webkit-animation-delay: 0.6s;
-    animation-delay: 0.6s;
-  }
-}
-
-@keyframes bubble {
-  0% {
-    -webkit-transform: scale(0);
-    transform: scale(0);
-  }
-  50% {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-  }
-  100% {
-    -webkit-transform: scale(0);
-    transform: scale(0);
-  }
-}
-
 .today-appointments {
   width: 100%;
   display: flex;
@@ -185,18 +135,22 @@ $animation-speed: 1.2s;
     width: 70%;
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    align-items: flex-start;
     .today-label {
       color: white;
       font-weight: 900;
-      font-size: 30px;
+      font-size: 20px;
+    }
+    .today-label2 {
+      @extend .today-label;
+      font-size: 16px;
     }
     .next-appointment {
       color: white;
       font-size: 12px;
       font-weight: 300;
       font-style: italic;
-      word-break:  break-word;
+      word-break: break-word;
       width: 35%;
     }
   }
@@ -210,17 +164,165 @@ $animation-speed: 1.2s;
   margin: 20px 0;
 }
 
-.appointment.fas.fa-check {
-  color: grey;
-}
-
 .upcoming-appointments {
   display: flex;
   flex-direction: column;
 
   .upcoming-label {
     font-weight: 900;
-    font-size: 30px;
+    font-size: 20px;
     align-self: center;
   }
 }
+
+.button.load-more {
+  background: #1aab8a;
+  border: none;
+  position: relative;
+  height: 40px;
+  font-size: 14px;
+  transition: 800ms ease all;
+  width: 50%;
+  align-self: center;
+  margin-bottom: 2%;
+}
+.button.load-more:hover {
+  background: #fff;
+  color: #1aab8a;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  transition: 300ms ease all;
+}
+
+@media (min-width: 360px) {
+  .today-appointments {
+    .today-info {
+      .today-label {
+        font-size: 30px;
+      }
+      .today-label2 {
+        font-size: 22px;
+      }
+    }
+  }
+}
+@media (min-width: 960px) {
+  .avatar {
+    height: 40px;
+  }
+  .main-container {
+    top: 55%;
+  }
+
+  .today-appointments {
+    .today-info {
+      .today-label2 {
+        font-size: 30px;
+      }
+    }
+  }
+  .today-appointments {
+    min-height: 20vh;
+    .today-info {
+      width: 90%;
+      justify-content: space-between;
+      align-items: center;
+      .next-appointment {
+        text-align: center;
+      }
+    }
+  }
+
+  .section-appointments {
+    margin: 1% 10%;
+    border: 0;
+    height: 10vh;
+    border-left: 7px solid #4990e2;
+    .actions-icons {
+      flex-direction: row;
+      width: 60px;
+      i {
+        cursor: pointer;
+      }
+    }
+    &__actions {
+      width: 22%;
+    }
+
+    &__time {
+      width: 12%;
+      max-width: 12%;
+      .time {
+        font-size: 10px;
+      }
+    }
+    &__info {
+      flex-direction: row;
+      width: 60%;
+      .personal-info {
+        height: 100%;
+        flex-direction: row;
+        justify-content: space-evenly;
+        width: 80%;
+      }
+
+      .date-status {
+        width: 30%;
+      }
+      .name-location {
+        font-size: 11px;
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 70%;
+        justify-content: space-evenly;
+      }
+      .fas.fa-map-marker-alt {
+        justify-content: space-between;
+        width: 25%;
+        margin: 0;
+      }
+      .time-separator {
+        height: 86%;
+        width: 2px;
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+  .upcoming-appointments {
+    margin-bottom: 10px;
+  }
+
+  .section-appointments.cancelled {
+    border: 0;
+    border-left: 7px solid #f66972;
+  }
+  .section-appointments.pending {
+    border: 0;
+    border-left: 7px solid #fca023;
+  }
+}
+
+@media (min-width: 1240px) {
+  .section-appointments {
+    height: 13vh;
+    &__time {
+      width: 10%;
+      max-width: 10%;
+    }
+    &__info {
+      font-size: 16px;
+      .name-location {
+        font-size: 16px;
+      }
+    }
+  }
+  .avatar {
+    height: 50px;
+  }
+}
+
+// * {
+//   outline: 1px solid red;
+// }

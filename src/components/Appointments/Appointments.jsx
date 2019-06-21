@@ -4,9 +4,9 @@ import * as Service from "../../service/appService";
 import { Months } from "../../constants";
 
 export default function Appointments(props) {
-  const { filter } = props;
+  const { filter, getElement, edit, width } = props;
   const [dates, setDates] = useState();
-  const [pages, setPages] = useState(3);
+  const [pages, setPages] = useState(5);
   const [force, setforce] = useState(false);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ export default function Appointments(props) {
     Service.getFiltered(params, pages, e => {
       setDates(e);
     });
-  }, [pages, filter, force]);
+  }, [pages, filter, force, edit]);
 
   const formatDate = e => {
     const start = new Date(e.appointment.start);
@@ -32,11 +32,9 @@ export default function Appointments(props) {
 
     return `${hour}:${minutes} AM`;
   };
-
   const getDuration = e => {
     let end;
     let start;
-    console.log(filter);
     if (dates && dates.length > 0) {
       if (e === "duration") {
         start = new Date(dates[0].appointment.start);
@@ -46,7 +44,6 @@ export default function Appointments(props) {
         end = new Date(e.appointment.end);
       }
     }
-
     var diff = (end - start) / 1000;
     diff /= 60;
     return `${Math.abs(Math.round(diff))} minutes`;
@@ -84,59 +81,92 @@ export default function Appointments(props) {
     );
   };
 
-  const cancelDate = e => {
+  const cancelDate = (r, e) => {
+    r.stopPropagation();
     e.status = "cancelled";
     Service.changeStatus(e, () => {
       setforce(!force);
     });
   };
 
-  const confirmDate = e => {
+  const confirmDate = (r, e) => {
+    r.stopPropagation();
     e.status = "confirmed ";
     Service.changeStatus(e, () => {
       setforce(!force);
     });
   };
 
+  const clickAppointment = e => {
+    e.preventDefault();
+    if (e.target.getAttribute("class").includes("section-appointments")) {
+      const id = e.currentTarget.getAttribute("element");
+      if (id) {
+        setforce(!force);
+        getElement(id);
+        edit("false");
+      }
+    } else {
+      const id = e.currentTarget.getAttribute("element");
+      if (id) {
+        setforce(!force);
+        getElement(id);
+        edit("true");
+      }
+    }
+  };
+
   const markup = (e, index) => (
-    <section className={`section-appointments ${e.status}`} key={index}>
+    <section
+      className={`section-appointments ${e.status}`}
+      key={index}
+      onClick={clickAppointment}
+      element={e.id}>
       <section className={`section-appointments__time ${e.status}`}>
-        <div className="time">
-          <span className="time__hour">
-            <span>{formatDate(e)}</span>
+        <div className='time'>
+          <span className='time__hour'>
+            <span className={"date-time-span"}>{formatDate(e)}</span>
           </span>
-          <span className="time__duration">{getDuration(e)}</span>
-          <div className="time__separator" />
+          <span className='time__duration'>{getDuration(e)}</span>
+          <div className='time__separator' />
         </div>
       </section>
-      <section className="section-appointments__info">
+      <section className='section-appointments__info'>
         <div className={`personal-info ${e.status}`}>
-          <img src={e.avatar} className="avatar" alt="avatar" />
-          <span>{`${e.first_name} ${e.last_name}`}</span>
-          <i className="fas fa-map-marker-alt">
-            <span className="location">{e.location[0].place}</span>
-          </i>
+          <span className='time-separator' />
+          <img src={e.avatar} className='avatar' alt='avatar' />
+          <div className='name-location'>
+            <span className='date-name'>{`${e.first_name} ${
+              e.last_name
+            }`}</span>
+            <i className='fas fa-map-marker-alt'>
+              <span className='location'>{e.location.place}</span>
+            </i>
+          </div>
         </div>
-        <div className="date-status">
+        <div className='date-status'>
           <span className={`date-status__date ${e.status}`}>{getMonth(e)}</span>
-          <span className={`date-status__status ${e.status}`}>{e.status}</span>
+          <span className={`date-status__status ${e.status}`}>
+            {e.status.charAt(0).toUpperCase() + e.status.slice(1)}
+          </span>
         </div>
       </section>
 
-      <section className="section-appointments__actions">
+      <section className='section-appointments__actions'>
         {e.status === "cancelled" ? null : (
-          <div className="actions-icons">
+          <div className='actions-icons'>
             {e.status === "pending" ? (
-              <button className="hidden-button">
-                <i
-                  className="appointment fas fa-check"
-                  onClick={() => confirmDate(e)}
-                />
-              </button>
+              <i
+                className='appointment fas fa-check'
+                onClick={r => confirmDate(r, e)}
+              />
             ) : (
-              <i className="fas fa-edit" />
+              <i
+                className='fas fa-edit'
+                onClick={() => (width < 960 ? edit() : edit("true"))}
+              />
             )}
-            <i className="fas fa-times" onClick={() => cancelDate(e)} />
+            <i className='fas fa-times' onClick={r => cancelDate(r, e)} />
           </div>
         )}
       </section>
@@ -156,29 +186,36 @@ export default function Appointments(props) {
       );
   };
 
-  const renderButton = () =>
-    dates ? (
-      <button onClick={() => setPages(pages + 2)}>Load more</button>
+  const renderButton = () => {
+    return dates ? (
+      <button onClick={() => setPages(pages + 2)} className='button load-more'>
+        Load more
+      </button>
     ) : null;
+  };
 
   return dates ? (
-    <main className="main-container">
-      <div className="today-appointments">
-        <div className="today-info">
-          <span className="today-label">Today</span>
-          <span className="next-appointment">{`next meeting in ${getDuration(
+    <section className='main-container'>
+      <div className='today-appointments'>
+        <div className='today-info'>
+          {renderToday()[0] ? (
+            <span className='today-label'>Today</span>
+          ) : (
+            <span className='today-label2'>Nothing today </span>
+          )}
+          <span className='next-appointment'>{`Meeting in ${getDuration(
             "duration"
           )}`}</span>
         </div>
+
         {renderToday()}
-        <div className="today-separator" />
+        <div className='today-separator' />
       </div>
-      <div className="upcoming-appointments">
-        <span className="upcoming-label">Upcoming</span>
+      <div className='upcoming-appointments'>
+        <span className='upcoming-label'>Upcoming</span>
         {renderUpcoming()}
       </div>
-
       {renderButton()}
-    </main>
+    </section>
   ) : null;
 }

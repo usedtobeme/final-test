@@ -1,0 +1,355 @@
+.backdropStyle {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 50px;
+  height: 100vh;
+  z-index: 6;
+  transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.modalStyle {
+  background-color: #fff;
+  border-radius: 25px;
+  width: 75%;
+  margin: 0 auto;
+  padding: 15px;
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -41%);
+}
+.modal-details {
+  height: 20vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.modal-label {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.date-status {
+  &__status.pending {
+    color: #fca023;
+    display: list-item;
+    font-size: 12px;
+    font-weight: 700;
+  }
+}
+.user-info {
+  height: 70%;
+}
+
+.user-avatar {
+  border-radius: 50%;
+  background-color: rgba(256, 256, 256, 0.2);
+  display: flex;
+  align-self: center;
+  margin-right: 1%;
+  height: 40px;
+  background-color: lightblue;
+}
+
+.users-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 70%;
+}
+.fa-mug-hot {
+  margin: 0 15px;
+}
+.fa-question {
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.form {
+  height: 30%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  .form-section {
+    margin: 10px 0;
+    font-size: 13px;
+    display: flex;
+    justify-content: space-around;
+    text-align: left;
+    align-items: center;
+    input,
+    select {
+      background: #fff;
+      color: rgba(0, 0, 0, 0.9);
+      box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.1);
+      outline: 0;
+      padding: 6px 5px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    input:focus {
+      border: 1px solid #5496d2;
+    }
+  }
+}
+
+.form-section input {
+  width: 70%;
+}
+.form-section select {
+  width: 75%;
+}
+.form-section span {
+  width: 30%;
+}
+
+.button-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.submit-button {
+  background: #1aab8a;
+  color: #fff;
+  border: none;
+  position: relative;
+  border-radius: 50px;
+  height: 30px;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+  width: 40%;
+  align-self: center;
+  margin-top: 5%;
+}
+.submit-button:hover {
+  background: #fff;
+  color: #1aab8a;
+  border: 1px solid;
+  transition: 500ms ease all;
+}
+
+.cancel-button {
+  @extend .submit-button;
+  background: #900c3e;
+}
+.cancel-button:hover {
+  background: #fff;
+  color: #900c3e;
+  border: 1px solid;
+  transition: 500ms ease all;
+}
+
+.avatar-form {
+  width: 15%;
+  .image-input {
+    display: none;
+  }
+  .user-avatar {
+    cursor: pointer;
+  }
+}
+
+.date-avatar {
+  display: flex;
+  flex-direction: column;
+  font-size: 11px;
+}
+
+.sideBar-status {
+  &__status {
+    display: list-item;
+    color: #4990e2;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  &__status.pending {
+    color: #fca023;
+  }
+  &__status.cancelled {
+    color: #f66972;
+  }
+}
+.curr-users-info {
+  @extend .users-info;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 14vh;
+  .curr-first-info {
+    span:first-child() {
+      font-weight: 800;
+      margin: 5px 0;
+    }
+    span:nth-child(2) {
+      color: rgba(0, 0, 0, 0.5);
+    }
+  }
+}
+.curr-avatars {
+  display: flex;
+  align-items: center;
+}
+.curr-first-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.curr-modal-details {
+  @extend .modal-details;
+  height: 25vh;
+}
+
+.second-panel {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 25vh;
+  &--container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 0 5%;
+    height: 4.5vh;
+  }
+  .panel-location {
+    height: 7vh;
+  }
+  &--label {
+    font-weight: 900;
+  }
+  &--value {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 13px;
+  }
+  &--second-label {
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: 900;
+    font-size: 13px;
+  }
+  &--topics {
+    font-size: 12px;
+  }
+  .topics-container {
+    display: flex;
+    word-break: break-word;
+    flex-wrap: wrap;
+  }
+  &--container.panel-status {
+    justify-content: center;
+  }
+}
+
+.third-panel {
+  &--container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 10vh;
+  }
+  &--actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    .action {
+      cursor: pointer;
+      color: rgba(0, 0, 0, 0.5);
+      text-decoration: underline;
+      margin: 5px 0;
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  .modalStyle {
+    height: 70%;
+    overflow: scroll;
+  }
+}
+@media (min-width: 960px) {
+  .user-avatar {
+    height: 40px;
+  }
+  .backdropStyle {
+    position: relative;
+    padding: 0;
+    z-index: 6;
+    width: 100%;
+    height: auto;
+    background: 0;
+    .modalStyle {
+      width: initial;
+      margin: initial;
+      padding: initial;
+      position: relative;
+      top: initial;
+      right: initial;
+      transform: none;
+      border-radius: 0;
+      height: 100%;
+    }
+  }
+  .second-panel {
+    height: 30vh;
+  }
+
+  .form {
+    height: 100%;
+    width: auto;
+    padding: 5%;
+    .form-section {
+      margin: 10px 0;
+      font-size: 10px;
+      display: flex;
+      justify-content: space-around;
+      text-align: left;
+      align-items: center;
+      input,
+      select {
+        font-size: 7px;
+        background: #fff;
+        color: rgba(0, 0, 0, 0.9);
+        box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.1);
+        outline: 0;
+        padding: 6px 5px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+      }
+      input:focus {
+        border: 1px solid #5496d2;
+      }
+    }
+  }
+  .third-panel {
+    &--container {
+      height: 20vh;
+    }
+    &--actions {
+      padding-right: 10%;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+  }
+}
+
+@media (min-width: 1240px) {
+  .user-avatar {
+    height: 50px;
+  }
+  .form {
+    .form-section {
+      font-size: 13px;
+      input,
+      select {
+        font-size: 14px;
+      }
+    }
+  }
+}

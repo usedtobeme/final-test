@@ -3,7 +3,8 @@ import { Months } from "../../constants";
 import * as Service from "../../service/appService";
 import "./MonthView.scss";
 
-export default function MonthView() {
+export default function MonthView(props) {
+  const { modal } = props;
   const [currDate, setCurrDate] = useState({
     Month: new Date().getMonth(),
     Year: new Date().getFullYear()
@@ -74,56 +75,64 @@ export default function MonthView() {
   };
 
   return (
-    <section className='section-sidebar'>
-      <section className='section-date'>
-        <i
-          className='fas fa-chevron-left'
-          onClick={() => setMonthView(-1)}
-          onKeyDown={e => keyDown(-1, e)}
-          tabIndex={1}
-          aria-label='previous month view'
-        />
-        <div className='section-date__container'>
-          <span className='section-date__month'>{Months[currDate.Month]}</span>
-          <span className='section-date__year'>{currDate.Year}</span>
-        </div>
-        <i
-          className='fas fa-chevron-right'
-          onClick={() => setMonthView(1)}
-          tabIndex={2}
-          onKeyDown={e => keyDown(1, e)}
-          aria-label='next month view'
-        />
-      </section>
-      <section className='section-summary'>
-        <div className='section-summary__container'>
-          <div className='section-summary__icon section-summary__icon__confirmed'>
-            <i className='icon fas fa-check' />
+    <section className="section-sidebar">
+      <span className="background">
+        <section className="section-date">
+          <i
+            className="fas fa-chevron-left"
+            onClick={() => setMonthView(-1)}
+            onKeyDown={e => keyDown(-1, e)}
+            tabIndex={1}
+            aria-label="previous month view"
+          />
+          <div className="section-date__container">
+            <span className="section-date__month">
+              {Months[currDate.Month]}
+            </span>
+            <span className="section-date__year">{currDate.Year}</span>
           </div>
-          <div className='section-summary__text'>
+          <i
+            className="fas fa-chevron-right"
+            onClick={() => setMonthView(1)}
+            tabIndex={2}
+            onKeyDown={e => keyDown(1, e)}
+            aria-label="next month view"
+          />
+        </section>
+      </span>
+      <span className="background--2">
+
+      <section className="section-summary">
+        <div className="section-summary__container">
+          <div className="section-summary__icon section-summary__icon__confirmed">
+            <i className="icon fas fa-check" />
+          </div>
+          <div className="section-summary__text">
             <span>{getConfirmed()}</span>
             <span>Confirmed</span>
           </div>
         </div>
-        <div className='section-summary__container'>
-          <div className='section-summary__icon section-summary__icon__pending'>
-            <i className='icon far fa-clock' />
+        <div className="section-summary__container">
+          <div className="section-summary__icon section-summary__icon__pending">
+            <i className="icon far fa-clock" />
           </div>
-          <div className='section-summary__text'>
+          <div className="section-summary__text">
             <span>{getPending()}</span>
             <span>Pending</span>
           </div>
         </div>
-        <div className='section-summary__container'>
-          <div className='section-summary__icon section-summary__icon__canceled'>
-            <i className='icon fas fa-times' />
+        <div className="section-summary__container">
+          <div className="section-summary__icon section-summary__icon__canceled">
+            <i className="icon fas fa-times" />
           </div>
-          <div className='section-summary__text'>
+          <div className="section-summary__text">
             <span>{getCancelled()}</span>
             <span>Cancelled</span>
           </div>
         </div>
       </section>
+      </span> 
+      {modal ? React.cloneElement(modal) : null}
     </section>
   );
 }
